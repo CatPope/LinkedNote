@@ -4,16 +4,38 @@
 			"command": "npx",
 			"args": ["-y", "--package=task-master-ai", "task-master-ai"],
 			"env": {
-				// "ANTHROPIC_API_KEY": "YOUR_ANTHROPIC_API_KEY_HERE",
-				"PERPLEXITY_API_KEY": "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",
-				// "OPENAI_API_KEY": "YOUR_OPENAI_KEY_HERE",
-				// "GOOGLE_API_KEY": "YOUR_GOOGLE_KEY_HERE",
-				// "XAI_API_KEY": "YOUR_XAI_KEY_HERE",
-				// "OPENROUTER_API_KEY": "YOUR_OPENROUTER_KEY_HERE",
-				// "MISTRAL_API_KEY": "YOUR_MISTRAL_KEY_HERE",
-				// "AZURE_OPENAI_API_KEY": "YOUR_AZURE_KEY_HERE",
-				// "OLLAMA_API_KEY": "YOUR_OLLAMA_API_KEY_HERE"
+				"PERPLEXITY_API_KEY": "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"
 			}
+		},
+		"github": {
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@smithery/cli@latest",
+				"run",
+				"@smithery-ai/github",
+				"--key",
+				"b72dd65c-bd95-4aea-af96-aab4c38fd3ab",
+				"--profile",
+				"famous-monkey-gPQrPg"
+			]
+		},
+		"notion": {
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@smithery/cli@latest",
+				"run",
+				"@smithery/notion",
+				"--key",
+				"b72dd65c-bd95-4aea-af96-aab4c38fd3ab",
+				"--profile",
+				"famous-monkey-gPQrPg"
+			]
 		}
 	}
 }
