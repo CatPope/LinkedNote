@@ -1,0 +1,83 @@
+<context>
+# Overview
+The "Link AI Summarizer" is a Notion integration designed to streamline information gathering and boost productivity for Notion users. It tackles the inefficiency of manually reading and summarizing web content. By allowing users to quickly summarize linked web pages directly within their Notion workspace using their own AI API keys, this product transforms a time-consuming task into a simple, automated action. It's a valuable tool for anyone who frequently organizes information from the web, including developers, designers, and researchers.
+
+# Core Features
+- Customizable Summarization Modes: The product offers a flexible summarization system with both built-in and user-defined options.
+    - Built-in Modes: Users can select from three predefined modes:
+        - Tag: Extracts key keywords from the content.
+        - Summary: Provides a concise summary of the content.
+        - Tag + Summary: Combines the above two for a comprehensive overview.
+        For these built-in modes, users can adjust key parameters like the number of tags to extract or the length of the summary (e.g., in lines).
+    - Custom Modes: For more specialized needs, users can create their own summarization profiles by writing custom prompts. This allows for highly specific and tailored output. 
+        - For example:
+            - Custom Profile Name: `python_filter`
+            - Custom Prompt: "Extract and organize only information related to Python topics (e.g., library usage, error resolution, performance comparisons) from the provided content."
+- User-Controlled AI Integration: The product leverages users' personal AI API keys (e.g., OpenAI, Google Gemini). This model ensures that users have full control over their API usage and costs, while providing flexibility to choose different AI models for different summarization tasks.
+- Intuitive User Interface: The summarization function is triggered via a context menu that appears when a user right-clicks a link in Notion. This seamless integration provides a native and frictionless user experience without cluttering the workspace.
+
+# User Experience
+- User Personas: The primary users are professionals who regularly use Notion for knowledge management and project documentation. This includes developers who track technical articles, designers who collect design inspiration, and researchers who compile data from various online sources.
+- Key User Flows:
+    1. A user pastes a web link into a Notion page.
+    2. They right-click the link to open the context menu.
+    3. From the menu, they select "AI Summarize" and choose a summarization method (e.g., "Summary," "Custom 1").
+    4. The system processes the request using the user's configured AI model.
+    5. The summarized content is generated and automatically inserted as a new block directly below the link.
+    6. If an error occurs (e.g., invalid link, API key not found), a popup notification alerts the user.
+- UI/UX Considerations: The integration is designed to be minimal and unobtrusive. The use of Notion's native context menu ensures a familiar feel. Popup notifications are used for critical alerts to maintain user focus on their current task.
+</context>
+
+<PRD>
+# Technical Architecture
+- System Components:
+    - Notion Integration: A front-end component that interacts with the Notion API to handle user inputs (context menu clicks) and output generated content.
+    - Backend Service: A Python-based service (e.g., serverless function) responsible for orchestrating the entire process. This service receives requests from the Notion integration, fetches web content, calls the AI models, and sends the summarized result back.
+    - AI Orchestration: The backend utilizes LangChain and LangGraph to manage complex logic for interacting with multiple AI APIs and executing user-defined summarization prompts.
+    - Database: A structured database to securely store user data and settings.
+- Data Models:
+    - User Table: Stores basic user information and Notion access tokens.
+    - API_Key Table: Stores encrypted AI API keys for various providers.
+    - Summarization_Profile Table: Stores user-defined summarization profiles, including templates and associated AI models.
+- APIs and Integrations:
+    - Notion API: For reading link data and writing new blocks.
+    - AI Provider APIs: Integration with providers like OpenAI and Google Gemini.
+- Infrastructure Requirements:
+    - The backend should be a scalable, cost-effective service (e.g., AWS Lambda, Google Cloud Functions) to handle user requests efficiently.
+    - Secure storage for encrypted API keys (e.g., managed secrets service).
+
+# Development Roadmap
+- Phase 1: MVP (Minimum Viable Product)
+    - Core Functionality: Develop the ability to paste a link, right-click, and trigger a basic summarization.
+    - AI Integration: Implement a single, default AI model for summarization.
+    - Initial Summarization Modes: Offer a fixed, non-customizable "Summary" mode (e.g., 5-line summary).
+    - Notion UI: Create the context menu trigger and a basic output block below the link.
+    - Error Handling: Basic popup notifications for API key errors and invalid links.
+- Phase 2: Enhanced Customization
+    - Multiple AI Model Support: Enable users to register multiple AI API keys from different providers.
+    - Advanced Summarization Modes: Add 'Tag' and 'Tag + Summary' options.
+    - User Customization: Implement the user-defined summarization profile feature with template variables like `{N}`.
+    - Per-Profile AI Model Selection: Allow users to assign specific AI models to each summarization profile.
+- Phase 3: Performance and Scalability
+    - Performance Optimization: Implement web scraping techniques to extract only main content, reducing processing time and costs.
+    - Caching: Develop a caching layer to reuse summaries for previously processed links.
+    - UI/UX Refinements: Improve the user interface for managing API keys and custom profiles.
+
+# Logical Dependency Chain
+1. Foundation (Phase 1): The absolute first step is to establish the fundamental integration with the Notion API. This includes the ability to identify a link and insert new content. Concurrently, a basic backend service must be able to make a single, hard-coded API call to an AI model and process its response. This gets a visible, usable front-end working quickly.
+2. Modularity (Phase 2): Once the core loop is functional, the next logical step is to make the system modular. This involves abstracting the AI model call so that it can handle different providers and allowing users to save and retrieve their own settings (API keys, custom profiles). This builds upon the foundational service without breaking it.
+3. Refinement (Phase 3): After the core features are in place and the product is functionally complete, focus on performance and user experience improvements. Implementing content extraction optimization and caching strategies directly improves the efficiency of the established system.
+
+# Risks and Mitigations
+- Risk: Notion API changes or limitations could break the integration.
+    - Mitigation: Stay up-to-date with Notion API documentation and best practices. Maintain a clear separation between the Notion-specific code and the core backend logic to allow for easier adaptation.
+- Risk: High costs for AI API usage, particularly for users processing large documents, could lead to a poor user experience.
+    - Mitigation: Clearly communicate to users that they are responsible for their own API costs. Implement features that allow users to monitor their usage or set spending limits within the product interface.
+- Risk: Securing user-provided API keys is a critical security challenge.
+    - Mitigation: Do not store keys in plain text. Use strong encryption (e.g., AES-256) and store them in a secure, managed service. Ensure all API traffic is proxied through a secure backend service to prevent client-side exposure.
+
+# Appendix
+- Research Findings: Discussions on platforms like Dev.to and Reddit show a strong demand among developers for Notion automation tools, especially for tasks related to content summarization and knowledge management.
+- Technical Specifications:
+    - Web Scraping: Use libraries like `BeautifulSoup` or `Scrapy` to parse HTML and extract main content.
+    - API Security: Implement OAuth 2.0 for Notion user authentication and a robust encryption library for key management.
