@@ -1,83 +1,383 @@
-<context>
-# Overview
-The "Link AI Summarizer" is a Notion integration designed to streamline information gathering and boost productivity for Notion users. It tackles the inefficiency of manually reading and summarizing web content. By allowing users to quickly summarize linked web pages directly within their Notion workspace using their own AI API keys, this product transforms a time-consuming task into a simple, automated action. It's a valuable tool for anyone who frequently organizes information from the web, including developers, designers, and researchers.
+# LinkedNote - PRD
 
-# Core Features
-- Customizable Summarization Modes: The product offers a flexible summarization system with both built-in and user-defined options.
-    - Built-in Modes: Users can select from three predefined modes:
-        - Tag: Extracts key keywords from the content.
-        - Summary: Provides a concise summary of the content.
-        - Tag + Summary: Combines the above two for a comprehensive overview.
-        For these built-in modes, users can adjust key parameters like the number of tags to extract or the length of the summary (e.g., in lines).
-    - Custom Modes: For more specialized needs, users can create their own summarization profiles by writing custom prompts. This allows for highly specific and tailored output. 
-        - For example:
-            - Custom Profile Name: `python_filter`
-            - Custom Prompt: "Extract and organize only information related to Python topics (e.g., library usage, error resolution, performance comparisons) from the provided content."
-- User-Controlled AI Integration: The product leverages users' personal AI API keys (e.g., OpenAI, Google Gemini). This model ensures that users have full control over their API usage and costs, while providing flexibility to choose different AI models for different summarization tasks.
-- Intuitive User Interface: The summarization function is triggered via a context menu that appears when a user right-clicks a link in Notion. This seamless integration provides a native and frictionless user experience without cluttering the workspace.
+</context>
+# Overview  
+LinkedNote is a desktop application that automatically detects web links copied to the clipboard and provides AI-powered summaries with a single click. It solves the problem of information overload by eliminating the need to manually read through lengthy web articles, making it valuable for developers, researchers, and knowledge workers who frequently process web content across multiple applications (Slack, Discord, browsers, etc.).
 
-# User Experience
-- User Personas: The primary users are professionals who regularly use Notion for knowledge management and project documentation. This includes developers who track technical articles, designers who collect design inspiration, and researchers who compile data from various online sources.
-- Key User Flows:
-    1. A user pastes a web link into a Notion page.
-    2. They right-click the link to open the context menu.
-    3. From the menu, they select "AI Summarize" and choose a summarization method (e.g., "Summary," "Custom 1").
-    4. The system processes the request using the user's configured AI model.
-    5. The summarized content is generated and automatically inserted as a new block directly below the link.
-    6. If an error occurs (e.g., invalid link, API key not found), a popup notification alerts the user.
-- UI/UX Considerations: The integration is designed to be minimal and unobtrusive. The use of Notion's native context menu ensures a familiar feel. Popup notifications are used for critical alerts to maintain user focus on their current task.
+The product transforms a time-consuming manual task into an automated, cross-platform action that works regardless of which application the user is currently using, significantly improving productivity for information gathering workflows.
+
+# Core Features  
+
+## Automatic Clipboard Monitoring
+- **What it does**: Continuously monitors the system clipboard for web URLs and triggers notifications when detected
+- **Why it's important**: Eliminates manual copy-paste workflows and provides seamless integration across all applications
+- **How it works**: Uses OS-specific clipboard APIs to detect URL patterns (http/https) and displays system tray notifications
+
+## AI-Powered Summarization Modes
+- **What it does**: Offers three distinct summarization options - Summary (3-paragraph condensed version), Tags (5 key keywords), and Full (combined summary + keywords)
+- **Why it's important**: Provides flexibility for different use cases while keeping options simple and predictable
+- **How it works**: Sends scraped web content to OpenAI API with predefined prompts optimized for each mode
+
+## System Tray Integration
+- **What it does**: Runs persistently in the system tray with minimal UI footprint, showing popup notifications and result windows when needed
+- **Why it's important**: Maintains low system impact while providing always-available functionality without cluttering the desktop
+- **How it works**: Uses Electron's system tray APIs to create native OS integration with popup windows for interaction
+
+## Local Data Management
+- **What it does**: Securely stores API keys and maintains a history of processed summaries in local SQLite database
+- **Why it's important**: Ensures user privacy and provides offline access to previous summaries without cloud dependency
+- **How it works**: Uses AES-256 encryption for sensitive data and local file storage for complete user control
+
+# User Experience  
+
+## User Personas
+- **Primary**: Developers and technical professionals who regularly share and consume technical articles, documentation, and blog posts across team communication tools
+- **Secondary**: Researchers and content creators who need to quickly process and organize information from multiple web sources
+- **Tertiary**: General knowledge workers who want to efficiently digest web content without full reading
+
+## Key User Flows
+
+### Primary Flow - Quick Summarization
+1. User copies any web link from any application (browser, Slack, email, etc.)
+2. System automatically detects URL and shows 3-second system tray notification
+3. User clicks notification to open 300x200px popup window
+4. User selects one of three summarization modes (Summary/Tags/Full)
+5. User clicks "Summarize" button and sees loading indicator
+6. Results appear in new 600x400px window and are automatically copied to clipboard
+7. User can immediately paste the summary anywhere or save for later reference
+
+### Secondary Flow - Settings Management
+1. User right-clicks system tray icon and selects "Settings"
+2. Settings window opens with API key input field
+3. User enters OpenAI API key and clicks "Save"
+4. Key is encrypted and stored locally with success confirmation
+
+## UI/UX Considerations
+- **Minimal Interface**: System tray icon only, with popup windows appearing on-demand
+- **Fixed Dimensions**: Consistent 300x200px popup and 600x400px results to prevent UI confusion
+- **Native Integration**: Uses OS-native notifications and styling for familiar user experience
+- **Immediate Feedback**: Loading states and success/error messages for all operations
+- **Clipboard Integration**: Results automatically copied for immediate use in other applications
 </context>
 
 <PRD>
-# Technical Architecture
-- System Components:
-    - Notion Integration: A front-end component that interacts with the Notion API to handle user inputs (context menu clicks) and output generated content.
-    - Backend Service: A Python-based service (e.g., serverless function) responsible for orchestrating the entire process. This service receives requests from the Notion integration, fetches web content, calls the AI models, and sends the summarized result back.
-    - AI Orchestration: The backend utilizes LangChain and LangGraph to manage complex logic for interacting with multiple AI APIs and executing user-defined summarization prompts.
-    - Database: A structured database to securely store user data and settings.
-- Data Models:
-    - User Table: Stores basic user information and Notion access tokens.
-    - API_Key Table: Stores encrypted AI API keys for various providers.
-    - Summarization_Profile Table: Stores user-defined summarization profiles, including templates and associated AI models.
-- APIs and Integrations:
-    - Notion API: For reading link data and writing new blocks.
-    - AI Provider APIs: Integration with providers like OpenAI and Google Gemini.
-- Infrastructure Requirements:
-    - The backend should be a scalable, cost-effective service (e.g., AWS Lambda, Google Cloud Functions) to handle user requests efficiently.
-    - Secure storage for encrypted API keys (e.g., managed secrets service).
+# Technical Architecture  
 
-# Development Roadmap
-- Phase 1: MVP (Minimum Viable Product)
-    - Core Functionality: Develop the ability to paste a link, right-click, and trigger a basic summarization.
-    - AI Integration: Implement a single, default AI model for summarization.
-    - Initial Summarization Modes: Offer a fixed, non-customizable "Summary" mode (e.g., 5-line summary).
-    - Notion UI: Create the context menu trigger and a basic output block below the link.
-    - Error Handling: Basic popup notifications for API key errors and invalid links.
-- Phase 2: Enhanced Customization
-    - Multiple AI Model Support: Enable users to register multiple AI API keys from different providers.
-    - Advanced Summarization Modes: Add 'Tag' and 'Tag + Summary' options.
-    - User Customization: Implement the user-defined summarization profile feature with template variables like `{N}`.
-    - Per-Profile AI Model Selection: Allow users to assign specific AI models to each summarization profile.
-- Phase 3: Performance and Scalability
-    - Performance Optimization: Implement web scraping techniques to extract only main content, reducing processing time and costs.
-    - Caching: Develop a caching layer to reuse summaries for previously processed links.
-    - UI/UX Refinements: Improve the user interface for managing API keys and custom profiles.
+## System Components
+- **Electron Desktop App**: Cross-platform frontend handling UI, clipboard monitoring, and system tray management
+- **FastAPI Backend**: Local Python server (port 8000) managing web scraping, AI integration, and data persistence
+- **SQLite Database**: Local storage for user settings and summary history
+- **OpenAI Integration**: Direct API communication for text summarization
+
+## Data Models
+```sql
+-- Users table for settings
+users (
+    id: INTEGER PRIMARY KEY,
+    openai_api_key: TEXT (AES-256 encrypted),
+    created_at: TIMESTAMP
+)
+
+-- Summary history
+summaries (
+    id: INTEGER PRIMARY KEY,
+    url: TEXT,
+    mode: TEXT (summary|tags|full),
+    content: TEXT,
+    created_at: TIMESTAMP
+)
+```
+
+## APIs and Integrations
+```python
+# Backend API
+POST /api/summarize
+Request: {
+    "url": "https://example.com",
+    "mode": "summary|tags|full", 
+    "api_key": "sk-..."
+}
+Response: {
+    "success": true,
+    "content": "Summary result...",
+    "processing_time": 2.3
+}
+
+# Fixed AI Prompts
+PROMPTS = {
+    "summary": "다음 웹페이지 내용을 3문단으로 요약해주세요:\n\n{content}",
+    "tags": "다음 웹페이지에서 핵심 키워드 5개를 추출해주세요:\n\n{content}",
+    "full": "다음 웹페이지를 3문단으로 요약하고 키워드 5개를 추출해주세요:\n\n{content}"
+}
+```
+
+## Infrastructure Requirements
+- **Local Development**: Backend runs as local server, no cloud infrastructure needed
+- **Cross-platform Support**: Electron provides Windows/macOS/Linux compatibility
+- **Minimal Dependencies**: BeautifulSoup4 for web scraping, requests for HTTP, SQLite for data
+- **Security**: Local encryption for API keys, HTTPS-only external communication
+
+# Development Roadmap  
+
+## Phase 1: Foundation MVP
+**Scope**: Core desktop integration and basic backend functionality
+- Electron app with system tray icon and basic popup UI
+- Clipboard monitoring for URL detection with system notifications
+- FastAPI backend with single /summarize endpoint
+- Web scraping functionality using BeautifulSoup4 + requests
+- Basic error handling for network issues and invalid URLs
+- Simple in-memory processing without database persistence
+
+## Phase 2: AI Integration and Core Features
+**Scope**: Complete summarization functionality with all three modes
+- OpenAI API integration with error handling for API failures
+- Implementation of all three summarization modes (Summary/Tags/Full)
+- Results display window with proper formatting
+- Automatic clipboard copying of results
+- Basic settings window for API key input (unencrypted storage initially)
+
+## Phase 3: Data Persistence and Security
+**Scope**: Production-ready data management and security features
+- SQLite database setup with proper schema
+- AES-256 encryption for API key storage
+- Summary history functionality with local storage
+- Enhanced error handling with user-friendly messages
+- Proper logging for debugging and monitoring
+
+## Phase 4: Polish and Deployment
+**Scope**: Production readiness and distribution preparation
+- UI/UX refinements and consistent styling
+- Comprehensive error handling for all edge cases
+- Application packaging and installer creation
+- Performance optimization for clipboard monitoring
+- Documentation and user guides
 
 # Logical Dependency Chain
-1. Foundation (Phase 1): The absolute first step is to establish the fundamental integration with the Notion API. This includes the ability to identify a link and insert new content. Concurrently, a basic backend service must be able to make a single, hard-coded API call to an AI model and process its response. This gets a visible, usable front-end working quickly.
-2. Modularity (Phase 2): Once the core loop is functional, the next logical step is to make the system modular. This involves abstracting the AI model call so that it can handle different providers and allowing users to save and retrieve their own settings (API keys, custom profiles). This builds upon the foundational service without breaking it.
-3. Refinement (Phase 3): After the core features are in place and the product is functionally complete, focus on performance and user experience improvements. Implementing content extraction optimization and caching strategies directly improves the efficiency of the established system.
 
-# Risks and Mitigations
-- Risk: Notion API changes or limitations could break the integration.
-    - Mitigation: Stay up-to-date with Notion API documentation and best practices. Maintain a clear separation between the Notion-specific code and the core backend logic to allow for easier adaptation.
-- Risk: High costs for AI API usage, particularly for users processing large documents, could lead to a poor user experience.
-    - Mitigation: Clearly communicate to users that they are responsible for their own API costs. Implement features that allow users to monitor their usage or set spending limits within the product interface.
-- Risk: Securing user-provided API keys is a critical security challenge.
-    - Mitigation: Do not store keys in plain text. Use strong encryption (e.g., AES-256) and store them in a secure, managed service. Ensure all API traffic is proxied through a secure backend service to prevent client-side exposure.
+## Foundation First (Phase 1)
+The first priority is establishing the desktop integration loop: clipboard monitoring → notification → user interaction → visible result. This creates a working demonstration quickly, even with hardcoded summarization, because users can see and interact with the core workflow immediately.
 
-# Appendix
-- Research Findings: Discussions on platforms like Dev.to and Reddit show a strong demand among developers for Notion automation tools, especially for tasks related to content summarization and knowledge management.
-- Technical Specifications:
-    - Web Scraping: Use libraries like `BeautifulSoup` or `Scrapy` to parse HTML and extract main content.
-    - API Security: Implement OAuth 2.0 for Notion user authentication and a robust encryption library for key management.
+## Modular AI Integration (Phase 2) 
+Once the foundation works, the AI integration can be built as a modular component that slots into the existing request flow. This maintains the working desktop integration while adding the core value proposition. The three modes can be implemented sequentially, starting with the simplest "Summary" mode.
+
+## Data Layer Enhancement (Phase 3)
+After core functionality is proven, adding persistence and security improves the product without changing the user experience. This phase builds upon the established API patterns and user interface without breaking existing functionality.
+
+## Production Readiness (Phase 4)
+Final polish and edge case handling can only be effectively implemented once all core features are working together. This phase focuses on reliability and user experience refinements rather than new functionality.
+
+# Risks and Mitigations  
+
+## Technical Challenges
+**Risk**: Clipboard monitoring may behave inconsistently across different operating systems
+**Mitigation**: Use Electron's proven clipboard APIs and implement OS-specific fallbacks. Test extensively on all target platforms early in Phase 1.
+
+**Risk**: Web scraping may fail on sites with complex JavaScript rendering or anti-bot measures
+**Mitigation**: Focus on common article sites initially and implement graceful degradation. Use requests-html for JavaScript rendering if needed in later phases.
+
+## MVP Definition and Scope
+**Risk**: Over-engineering the initial version with too many features, delaying usable product
+**Mitigation**: Phase 1 MVP focuses solely on the core loop (clipboard → notification → basic summary) with hardcoded prompts. No customization, no persistence, no security - just working functionality.
+
+**Risk**: Underestimating the complexity of desktop integration and system tray behavior
+**Mitigation**: Start with Electron boilerplate and proven patterns. Build system tray functionality first before adding AI features.
+
+## Resource Constraints
+**Risk**: OpenAI API costs becoming prohibitive during development and testing  
+**Mitigation**: Use user-provided API keys from Phase 2 onwards. Implement request caching and content length limits to control costs.
+
+**Risk**: Cross-platform testing and deployment complexity
+**Mitigation**: Focus on single platform (Windows) for initial development, then expand. Use Electron's built-in packaging tools rather than custom deployment solutions.
+
+# Appendix  
+
+## Research Findings
+- Developer communities on Reddit and Dev.to consistently express frustration with manual summarization workflows
+- Existing tools like Notion AI and ChatGPT require manual copy-paste workflows that break user focus
+- System tray applications have high user acceptance for productivity tools when they remain unobtrusive
+
+## Technical Specifications
+
+### Performance Requirements
+- Clipboard detection: < 0.5 seconds
+- Web scraping: < 5 seconds timeout  
+- AI summarization: < 10 seconds timeout
+- UI responsiveness: < 100ms for all interactions
+
+### Security Specifications
+- API keys encrypted using AES-256 with user-specific salt
+- All external communication over HTTPS only
+- Local SQLite file with restricted filesystem permissions
+- No data transmission to external services except OpenAI API
+
+### File Structure
+```
+LinkedNote/
+├── electron-app/                           # Frontend Electron application
+│   ├── src/
+│   │   ├── main.ts                        # Electron main process entry
+│   │   ├── preload.ts                     # Preload script for secure IPC
+│   │   ├── main/                          # Main process modules
+│   │   │   ├── app-controller.ts          # Application lifecycle management
+│   │   │   ├── window-manager.ts          # Window creation and management
+│   │   │   ├── tray-manager.ts            # System tray setup and events
+│   │   │   ├── clipboard-monitor.ts       # Clipboard watching service
+│   │   │   ├── ipc-handler.ts             # IPC communication handler
+│   │   │   └── menu-builder.ts            # Application menu builder
+│   │   ├── renderer/                      # React renderer process
+│   │   │   ├── index.html                 # Main HTML template
+│   │   │   ├── index.tsx                  # React app entry point
+│   │   │   ├── App.tsx                    # Main app component
+│   │   │   ├── components/                # React components
+│   │   │   │   ├── common/                # Shared components
+│   │   │   │   │   ├── Button.tsx
+│   │   │   │   │   ├── Input.tsx
+│   │   │   │   │   ├── Modal.tsx
+│   │   │   │   │   ├── LoadingSpinner.tsx
+│   │   │   │   │   └── ErrorMessage.tsx
+│   │   │   │   ├── tray/                  # Tray-related components
+│   │   │   │   │   ├── TrayPopup.tsx      # Main tray popup
+│   │   │   │   │   ├── ModeSelector.tsx   # Summarization mode selection
+│   │   │   │   │   └── QuickActions.tsx   # Quick action buttons
+│   │   │   │   ├── result/                # Result display components
+│   │   │   │   │   ├── ResultWindow.tsx   # Main result window
+│   │   │   │   │   ├── SummaryDisplay.tsx # Summary content display
+│   │   │   │   │   ├── TagsList.tsx       # Tags display component
+│   │   │   │   │   └── ResultActions.tsx  # Copy/save actions
+│   │   │   │   ├── settings/              # Settings components
+│   │   │   │   │   ├── SettingsWindow.tsx # Main settings window
+│   │   │   │   │   ├── ApiKeyForm.tsx     # API key input form
+│   │   │   │   │   ├── PreferencesPanel.tsx # User preferences
+│   │   │   │   │   └── HistoryPanel.tsx   # Summary history view
+│   │   │   │   └── notification/          # Notification components
+│   │   │   │       ├── NotificationToast.tsx
+│   │   │   │       └── StatusIndicator.tsx
+│   │   │   ├── hooks/                     # Custom React hooks
+│   │   │   │   ├── useClipboard.ts        # Clipboard operations
+│   │   │   │   ├── useApi.ts              # API communication
+│   │   │   │   ├── useSettings.ts         # Settings management
+│   │   │   │   ├── useHistory.ts          # History management
+│   │   │   │   └── useNotification.ts     # Notification system
+│   │   │   ├── services/                  # Frontend services
+│   │   │   │   ├── api-client.ts          # Backend API client
+│   │   │   │   ├── storage-service.ts     # Local storage wrapper
+│   │   │   │   ├── clipboard-service.ts   # Clipboard utilities
+│   │   │   │   ├── window-service.ts      # Window management
+│   │   │   │   └── notification-service.ts # Notification handling
+│   │   │   ├── utils/                     # Utility functions
+│   │   │   │   ├── constants.ts           # App constants
+│   │   │   │   ├── validators.ts          # Input validation
+│   │   │   │   ├── formatters.ts          # Text formatters
+│   │   │   │   ├── url-parser.ts          # URL parsing utilities
+│   │   │   │   └── error-handler.ts       # Error handling
+│   │   │   ├── types/                     # TypeScript type definitions
+│   │   │   │   ├── api.ts                 # API response types
+│   │   │   │   ├── settings.ts            # Settings types
+│   │   │   │   ├── summary.ts             # Summary data types
+│   │   │   │   └── electron.ts            # Electron-specific types
+│   │   │   └── styles/                    # Styling files
+│   │   │       ├── globals.css            # Global styles
+│   │   │       ├── components.css         # Component-specific styles
+│   │   │       └── variables.css          # CSS variables
+│   │   └── assets/                        # Static assets
+│   │       ├── icons/                     # Application icons
+│   │       │   ├── icon.ico
+│   │       │   ├── icon.png
+│   │       │   ├── tray-icon.png
+│   │       │   └── tray-icon@2x.png
+│   │       └── images/                    # Other images
+│   ├── build/                             # Build configuration
+│   │   ├── webpack.main.config.js         # Main process webpack config
+│   │   ├── webpack.renderer.config.js     # Renderer process webpack config
+│   │   └── electron-builder.config.js     # Electron builder config
+│   ├── package.json                       # NPM dependencies
+│   ├── tsconfig.json                      # TypeScript configuration
+│   ├── tailwind.config.js                 # Tailwind CSS configuration
+│   └── .eslintrc.js                       # ESLint configuration
+├── backend/                               # Python FastAPI backend
+│   ├── main.py                           # FastAPI application entry
+│   ├── config/                           # Configuration files
+│   │   ├── __init__.py
+│   │   ├── settings.py                   # Application settings
+│   │   ├── database.py                   # Database configuration
+│   │   └── logging.py                    # Logging configuration
+│   ├── models/                           # Data models
+│   │   ├── __init__.py
+│   │   ├── base.py                       # Base model class
+│   │   ├── user.py                       # User model
+│   │   ├── summary.py                    # Summary model
+│   │   └── database.py                   # Database setup and connection
+│   ├── schemas/                          # Pydantic schemas
+│   │   ├── __init__.py
+│   │   ├── request.py                    # Request schemas
+│   │   ├── response.py                   # Response schemas
+│   │   ├── user.py                       # User schemas
+│   │   └── summary.py                    # Summary schemas
+│   ├── services/                         # Business logic services
+│   │   ├── __init__.py
+│   │   ├── scraper.py                    # Web scraping service
+│   │   ├── summarizer.py                 # AI summarization service
+│   │   ├── url_processor.py              # URL validation and processing
+│   │   ├── content_extractor.py          # Main content extraction
+│   │   ├── cache_service.py              # Caching mechanism
+│   │   └── encryption_service.py         # API key encryption
+│   ├── api/                              # API route handlers
+│   │   ├── __init__.py
+│   │   ├── routes/                       # Route definitions
+│   │   │   ├── __init__.py
+│   │   │   ├── summarize.py              # Summarization endpoints
+│   │   │   ├── settings.py               # Settings endpoints
+│   │   │   ├── history.py                # History endpoints
+│   │   │   └── health.py                 # Health check endpoints
+│   │   ├── dependencies.py               # FastAPI dependencies
+│   │   └── middleware.py                 # Custom middleware
+│   ├── core/                             # Core utilities
+│   │   ├── __init__.py
+│   │   ├── exceptions.py                 # Custom exception classes
+│   │   ├── security.py                   # Security utilities
+│   │   ├── validators.py                 # Input validators
+│   │   └── constants.py                  # Application constants
+│   ├── utils/                            # Utility functions
+│   │   ├── __init__.py
+│   │   ├── logger.py                     # Logging utilities
+│   │   ├── html_parser.py                # HTML parsing utilities
+│   │   ├── text_processor.py             # Text processing utilities
+│   │   └── file_utils.py                 # File operation utilities
+│   ├── tests/                            # Test files
+│   │   ├── __init__.py
+│   │   ├── conftest.py                   # Test configuration
+│   │   ├── test_scraper.py               # Scraper tests
+│   │   ├── test_summarizer.py            # Summarizer tests
+│   │   ├── test_api.py                   # API endpoint tests
+│   │   └── test_utils.py                 # Utility function tests
+│   ├── requirements.txt                  # Python dependencies
+│   ├── requirements-dev.txt              # Development dependencies
+│   ├── .env.example                      # Environment variables example
+│   └── pytest.ini                       # Pytest configuration
+├── shared/                               # Shared utilities between frontend/backend
+│   ├── types/                            # Shared type definitions
+│   │   ├── api-contracts.ts              # API contract types
+│   │   └── enums.ts                      # Shared enums
+│   └── constants/                        # Shared constants
+│       ├── modes.ts                      # Summarization modes
+│       └── errors.ts                     # Error codes
+├── docs/                                 # Documentation
+│   ├── README.md                         # Main documentation
+│   ├── DEVELOPMENT.md                    # Development guide
+│   ├── API.md                            # API documentation
+│   ├── DEPLOYMENT.md                     # Deployment guide
+│   └── ARCHITECTURE.md                   # Architecture overview
+├── scripts/                              # Build and utility scripts
+│   ├── build.sh                          # Build script
+│   ├── dev.sh                            # Development startup script
+│   ├── test.sh                           # Test runner script
+│   └── package.sh                        # Packaging script
+├── .github/                              # GitHub workflows
+│   └── workflows/
+│       ├── ci.yml                        # Continuous integration
+│       └── release.yml                   # Release workflow
+├── .gitignore                            # Git ignore rules
+├── LICENSE                               # License file
+└── README.md                             # Project overview
+```
+</PRD>

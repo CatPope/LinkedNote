@@ -36,6 +36,21 @@
 				"--profile",
 				"famous-monkey-gPQrPg"
 			]
+		},
+		"perplexity-search": {
+			"command": "cmd",
+			"args": [
+				"/c",
+				"npx",
+				"-y",
+				"@smithery/cli@latest",
+				"run",
+				"@arjunkmrm/perplexity-search",
+				"--key",
+				"b72dd65c-bd95-4aea-af96-aab4c38fd3ab",
+				"--profile",
+				"famous-monkey-gPQrPg"
+			]
 		}
 	}
 }
