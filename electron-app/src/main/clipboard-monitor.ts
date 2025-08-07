@@ -1,4 +1,5 @@
 import { clipboard } from 'electron';
+import log from 'electron-log';
 
 interface ClipboardMonitorOptions {
   interval?: number; // Polling interval in milliseconds
@@ -15,30 +16,32 @@ class ClipboardMonitor {
 
   public start(onUrlDetected: (url: string) => void): void {
     if (this.intervalId) {
-      console.warn('Clipboard monitor is already running.');
+      log.warn('Clipboard monitor is already running.');
       return;
     }
 
     this.lastClipboardText = clipboard.readText();
+    log.info('Clipboard monitor started.');
 
     this.intervalId = setInterval(() => {
       const currentClipboardText = clipboard.readText();
       if (currentClipboardText !== this.lastClipboardText) {
         this.lastClipboardText = currentClipboardText;
+        log.debug('Clipboard content changed.');
         const urlMatch = currentClipboardText.match(/^(https?:\/\/[^\s]+)/);
         if (urlMatch) {
+          log.info(`URL detected: ${urlMatch[1]}`);
           onUrlDetected(urlMatch[1]);
         }
       }
     }, this.interval);
-    console.log('Clipboard monitor started.');
   }
 
   public stop(): void {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
-      console.log('Clipboard monitor stopped.');
+      log.info('Clipboard monitor stopped.');
     }
   }
 }
