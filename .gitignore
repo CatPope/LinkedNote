@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+
+# Node.js / Electron
+node_modules/
+dist/
+build/
+
+# Database
+*.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
