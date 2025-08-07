@@ -1,124 +1,49 @@
-# Stage 1: Build the Electron app
-FROM node:20-slim AS builder
+# Use a Node.js base image
+FROM node:18-slim
 
+# Set working directory
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY electron-app/ ./electron-app/
-
-WORKDIR /app/electron-app
-
-RUN npm install
-RUN npm run build
-
-# Stage 2: Create the final image
-FROM debian:stable-slim
-
-WORKDIR /app
-
-# Install necessary dependencies for Electron
+# Install dependencies for Electron (Xvfb for headless, other libs)
+# These are common dependencies for Electron apps in a Linux environment
 RUN apt-get update && apt-get install -y \
+    xvfb \
     libgtk-3-0 \
-    libasound2 \
+    libnotify-dev \
+    libgconf-2-4 \
     libnss3 \
     libxss1 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libgconf-2-4 \
-    libgdk-pixbuf2.0-0 \
-    libgbm-dev \
+    libasound2 \
+    libxtst6 \
     libappindicator1 \
     libsecret-1-0 \
-    libvulkan1 \
-    libxkbcommon0 \
+    libxkbcommon-x11-0 \
+    libxrandr2 \
     libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libxtst6 \
-    libnss3 \
-    libcups2 \
-    libdrm-dev \
-    libxkbfile1 \
-    libxmu-dev \
-    libxpm-dev \
-    libxt-dev \
-    libxxf86vm-dev \
-    libxcb-dri3-0 \
-    libx11-xcb1 \
-    libxrender1 \
-    libxi6 \
-    libsm6 \
-    libice6 \
-    libdbus-1-3 \
-    libexpat1 \
-    libfontconfig1 \
-    libfreetype6 \
-    libglib2.0-0 \
-    libjpeg62-turbo \
-    libpng16-16 \
-    libstdc++6 \
-    libuuid1 \
-    libwebp6 \
     libxcursor1 \
-    libxext6 \
-    libxft2 \
-    libxinerama1 \
-    libxrandr2 \
-    libxrender1 \
-    libxshmfence-dev \
-    libxxf86vm1 \
-    libgbm1 \
-    libnotify4 \
-    libgconf-2-4 \
-    libappindicator1 \
-    libsecret-1-0 \
-    libvulkan1 \
-    libxkbcommon0 \
-    libxcomposite1 \
     libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libxtst6 \
-    libnss3 \
-    libcups2 \
-    libdrm-dev \
-    libxkbfile1 \
-    libxmu-dev \
-    libxpm-dev \
-    libxt-dev \
-    libxxf86vm-dev \
-    libxcb-dri3-0 \
-    libx11-xcb1 \
-    libxrender1 \
-    libxi6 \
-    libsm6 \
-    libice6 \
-    libdbus-1-3 \
-    libexpat1 \
-    libfontconfig1 \
-    libfreetype6 \
-    libglib2.0-0 \
-    libjpeg62-turbo \
-    libpng16-16 \
-    libstdc++6 \
-    libuuid1 \
-    libwebp6 \
-    libxcursor1 \
     libxext6 \
-    libxft2 \
-    libxinerama1 \
-    libxrandr2 \
+    libxfixes3 \
+    libxi6 \
     libxrender1 \
-    libxshmfence-dev \
+    libxshmfence1 \
     libxxf86vm1 \
-    libgbm1 \
-    libnotify4 \
+    fonts-liberation \
+    xdg-utils \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the built application from the builder stage
-COPY --from=builder /app/electron-app/dist/ ./
+# Copy package.json and package-lock.json to leverage Docker cache
+COPY package*.json ./
 
-# Set the entry point
-ENTRYPOINT ["./LinkedNote"]
+# Install Node.js dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Set display for Electron (for headless environments)
+ENV DISPLAY=:99
+
+# Command to start Xvfb and then run the Electron app
+CMD ["sh", "-c", "Xvfb :99 -screen 0 1280x720x24 & npm start"]

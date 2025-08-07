@@ -1,4 +1,3 @@
-
 version: '3.8'
 
 services:
@@ -9,28 +8,24 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app/backend
-    environment:
-      - DATABASE_URL=sqlite:///./sql_app.db
-    command: poetry run uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+      - ./backend:/app
+    # command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload # For development with hot-reloading
 
   electron-app:
     build:
       context: ./electron-app
       dockerfile: Dockerfile
     volumes:
-      - ./electron-app:/app/electron-app
+      - ./electron-app:/app
+    # For Electron, you might need to expose X server or use VNC/NoVNC for GUI interaction
+    # This setup is primarily for building/testing in a headless environment.
+    # For local development with GUI, you'd typically run Electron outside Docker
+    # or use more advanced X server forwarding.
     environment:
       - DISPLAY=${DISPLAY}
-      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
-    # For Linux, you might need to add:
-    # - /tmp/.X11-unix:/tmp/.X11-unix
-    # For Windows/Mac, you might need to use a VNC server or X server.
-    # This part is highly dependent on your OS and setup.
-    # Consider using a dedicated Docker Desktop setup for Electron apps.
-    # For development, running Electron app directly on host is often easier.
-    # This Dockerfile is more for building and potentially running in a controlled environment.
-    # If you intend to run this in Docker, you'll need to configure X server forwarding.
-    # For now, we'll just build it.
-    # entrypoint: /app/electron-app/LinkedNote # This will be the entrypoint from the Dockerfile
-
+    # If you need to connect to the host's X server (Linux only):
+    # volumes:
+    #   - /tmp/.X11-unix:/tmp/.X11-unix
+    # network_mode: "host" # Use host network for direct X server access
+    depends_on:
+      - backend
