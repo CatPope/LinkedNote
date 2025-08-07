@@ -1,0 +1,36 @@
+
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+    environment:
+      - DATABASE_URL=sqlite:///./sql_app.db
+    command: poetry run uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+
+  electron-app:
+    build:
+      context: ./electron-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./electron-app:/app/electron-app
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+    # For Linux, you might need to add:
+    # - /tmp/.X11-unix:/tmp/.X11-unix
+    # For Windows/Mac, you might need to use a VNC server or X server.
+    # This part is highly dependent on your OS and setup.
+    # Consider using a dedicated Docker Desktop setup for Electron apps.
+    # For development, running Electron app directly on host is often easier.
+    # This Dockerfile is more for building and potentially running in a controlled environment.
+    # If you intend to run this in Docker, you'll need to configure X server forwarding.
+    # For now, we'll just build it.
+    # entrypoint: /app/electron-app/LinkedNote # This will be the entrypoint from the Dockerfile
+
