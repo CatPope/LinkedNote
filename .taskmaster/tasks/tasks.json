@@ -487,7 +487,7 @@
         "dependencies": [
           2
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -550,39 +550,30 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema and Model",
-            "description": "Create the database table to store user information and define the corresponding application model. The table should include fields for ID, email, hashed password, and timestamps.",
+            "title": "summaries 테이블 스키마 정의",
+            "description": "`backend/models.py`에 `summaries` 테이블의 스키마를 정의합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Use a migration tool to create a 'users' table with the following columns: `id` (primary key, auto-incrementing), `email` (unique, string), `password_hash` (string), `created_at` (timestamp), `updated_at` (timestamp). Create a `User` model in the application's ORM that maps to this table.",
-            "status": "pending",
-            "testStrategy": "Run database migrations and verify the 'users' table is created with the correct schema. Write a unit test to create and retrieve a user instance using the User model to ensure the ORM mapping is correct."
+            "parentTaskId": 11
           },
           {
             "id": 2,
-            "title": "Create User Registration API Endpoint",
-            "description": "Develop a public API endpoint (e.g., POST /api/auth/register) that allows new users to create an account. The endpoint should validate input, hash the password, and store the new user in the database.",
-            "dependencies": [],
-            "details": "The endpoint should accept a JSON body with `email` and `password`. Implement validation: email must be a valid format and not already exist; password must meet complexity requirements (e.g., min 8 characters). Use a strong hashing algorithm like bcrypt to hash the password before saving. Return a success message and a 201 status code upon successful registration.",
+            "title": "Alembic 마이그레이션 스크립트 생성",
+            "description": "`summaries` 테이블 생성을 위한 Alembic 마이그레이션 스크립트를 생성합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for: 1) successful registration with valid data, 2) attempting to register with an existing email, 3) attempting to register with an invalid email format, 4) attempting to register with a weak password."
+            "dependencies": [],
+            "parentTaskId": 11
           },
           {
             "id": 3,
-            "title": "Create User Login API Endpoint and Generate JWT",
-            "description": "Develop a public API endpoint (e.g., POST /api/auth/login) for user authentication. Upon successful login, generate and return a JSON Web Token (JWT).",
-            "dependencies": [],
-            "details": "The endpoint should accept `email` and `password`. Find the user by email in the database. Use bcrypt's compare function to verify the provided password against the stored hash. If credentials are valid, generate a JWT containing the user's ID and an expiration date. Return the JWT in the response body.",
+            "title": "마이그레이션 실행",
+            "description": "마이그레이션을 적용하여 데이터베이스 테이블을 생성합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for: 1) successful login with correct credentials, 2) login attempt with an incorrect password, 3) login attempt with a non-existent email. Verify the returned JWT contains the correct payload."
-          },
-          {
-            "id": 4,
-            "title": "Develop JWT Authentication Middleware for Protected Routes",
-            "description": "Create a middleware that intercepts requests to protected routes, validates the JWT from the Authorization header, and attaches the authenticated user's information to the request object.",
             "dependencies": [],
-            "details": "The middleware should extract the token from the 'Authorization: Bearer <token>' header. Verify the token's signature using the secret key and check for expiration. If valid, decode the payload to get the user ID, fetch the user from the database, and attach it to the request context (e.g., `req.user`). If the token is invalid or missing, return a 401 Unauthorized error.",
-            "status": "pending",
-            "testStrategy": "Create a dummy protected endpoint. Write integration tests to access it: 1) with a valid JWT (expect success), 2) without a JWT (expect 401), 3) with an invalid/malformed JWT (expect 401), 4) with an expired JWT (expect 401)."
+            "parentTaskId": 11
           }
         ]
       },
@@ -849,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:37:46.508Z",
+      "updated": "2025-08-08T15:39:47.782Z",
       "description": "Tasks for master context"
     }
   }
