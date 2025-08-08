@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Tray, Menu } = require('electron')
+const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-monitor');
 
 let tray = null
 
@@ -36,6 +37,13 @@ app.whenReady().then(() => {
       win.show()
     }
   })
+
+  startMonitoring(); // 클립보드 모니터링 시작
+
+  clipboardEmitter.on('url-detected', (url) => {
+    console.log('URL detected in main.js:', url);
+    // 여기에 URL 처리 로직 추가 (예: 알림 표시, 요약 요청)
+  });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {

@@ -152,7 +152,7 @@
             "title": "클립보드 모니터링 백그라운드 실행 설정",
             "description": "클립보드 모니터링이 Electron 앱의 메인 프로세스에서 백그라운드로 지속적으로 실행되도록 설정합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 3
           }
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:55:03.003Z",
+      "updated": "2025-08-08T14:55:50.382Z",
       "description": "Tasks for master context"
     }
   }
