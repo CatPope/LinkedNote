@@ -1,16 +1,19 @@
-const { app, BrowserWindow, Tray, Menu } = require('electron')
+const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron')
 const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-monitor');
 const { showNotification } = require('./src/main/notification-manager');
+const { readConfig, writeConfig } = require('./src/main/config-manager');
 
 let tray = null
 let mainWindow = null
+let settingsWindow = null
 
 function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
@@ -19,11 +22,17 @@ function createWindow () {
 }
 
 function createSettingsWindow() {
-  const settingsWindow = new BrowserWindow({
+  if (settingsWindow) {
+    settingsWindow.focus();
+    return;
+  }
+
+  settingsWindow = new BrowserWindow({
     width: 400,
     height: 300,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     },
     parent: mainWindow,
     modal: true,
@@ -33,6 +42,10 @@ function createSettingsWindow() {
   settingsWindow.loadFile('settings.html')
   settingsWindow.once('ready-to-show', () => {
     settingsWindow.show()
+  })
+
+  settingsWindow.on('closed', () => {
+    settingsWindow = null
   })
 }
 
@@ -65,6 +78,18 @@ app.whenReady().then(() => {
       console.log('Notification clicked for URL:', url);
       // 여기에 알림 클릭 시 수행할 동작 추가 (예: URL 열기, 요약 창 띄우기)
     });
+  });
+
+  // IPC 통신 핸들러
+  ipcMain.on('request-api-key', (event) => {
+    const config = readConfig();
+    event.sender.send('send-api-key', config.openaiApiKey);
+  });
+
+  ipcMain.on('save-api-key', (event, apiKey) => {
+    const config = readConfig();
+    config.openaiApiKey = apiKey;
+    writeConfig(config);
   });
 
   app.on('window-all-closed', () => {

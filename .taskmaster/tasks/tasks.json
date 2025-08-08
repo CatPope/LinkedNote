@@ -512,7 +512,7 @@
             "title": "API 키 저장 로직 구현",
             "description": "입력된 API 키를 로컬 파일(예: `config.json`)에 저장하는 로직을 구현합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 10
           },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:33:39.700Z",
+      "updated": "2025-08-08T15:35:16.930Z",
       "description": "Tasks for master context"
     }
   }

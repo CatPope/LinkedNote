@@ -13,7 +13,24 @@
       <button id="saveButton">Save</button>
     </div>
     <script>
-      // 여기에 JavaScript 로직 추가
+      const { ipcRenderer } = require('electron');
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const apiKeyInput = document.getElementById('apiKey');
+        const saveButton = document.getElementById('saveButton');
+
+        // 저장된 API 키 로드 (메인 프로세스에서 IPC 통신으로 받아옴)
+        ipcRenderer.send('request-api-key');
+        ipcRenderer.on('send-api-key', (event, apiKey) => {
+          apiKeyInput.value = apiKey || '';
+        });
+
+        saveButton.addEventListener('click', () => {
+          const apiKey = apiKeyInput.value;
+          ipcRenderer.send('save-api-key', apiKey);
+          alert('API Key saved!');
+        });
+      });
     </script>
   </body>
 </html>
