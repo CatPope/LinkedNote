@@ -3,9 +3,10 @@ const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-moni
 const { showNotification } = require('./src/main/notification-manager');
 
 let tray = null
+let mainWindow = null
 
 function createWindow () {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -13,8 +14,26 @@ function createWindow () {
     }
   })
 
-  win.loadFile('index.html')
-  win.hide() // 창 숨기기
+  mainWindow.loadFile('index.html')
+  mainWindow.hide()
+}
+
+function createSettingsWindow() {
+  const settingsWindow = new BrowserWindow({
+    width: 400,
+    height: 300,
+    webPreferences: {
+      nodeIntegration: true
+    },
+    parent: mainWindow,
+    modal: true,
+    show: false
+  })
+
+  settingsWindow.loadFile('settings.html')
+  settingsWindow.once('ready-to-show', () => {
+    settingsWindow.show()
+  })
 }
 
 app.whenReady().then(() => {
@@ -23,7 +42,7 @@ app.whenReady().then(() => {
   // 트레이 아이콘 설정
   tray = new Tray(__dirname + '/assets/icons/icon.png')
   const contextMenu = Menu.buildFromTemplate([
-    { label: '설정', click: () => { /* 설정 창 열기 로직 */ } },
+    { label: '설정', click: () => { createSettingsWindow() } },
     { label: '종료', click: () => app.quit() }
   ])
   tray.setToolTip('LinkedNote')
@@ -31,15 +50,14 @@ app.whenReady().then(() => {
 
   // 트레이 아이콘 클릭 시 창 토글
   tray.on('click', () => {
-    const win = BrowserWindow.getAllWindows()[0] // 첫 번째 창 가져오기
-    if (win.isVisible()) {
-      win.hide()
+    if (mainWindow.isVisible()) {
+      mainWindow.hide()
     } else {
-      win.show()
+      mainWindow.show()
     }
   })
 
-  startMonitoring(); // 클립보드 모니터링 시작
+  startMonitoring();
 
   clipboardEmitter.on('url-detected', (url) => {
     console.log('URL detected in main.js:', url);
@@ -49,15 +67,15 @@ app.whenReady().then(() => {
     });
   });
 
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit()
     }
   })
 })
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
   }
 })

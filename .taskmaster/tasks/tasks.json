@@ -503,7 +503,7 @@
             "title": "설정 창 로드 및 표시",
             "description": "Electron의 `BrowserWindow`를 사용하여 설정 창을 로드하고 표시합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 10
           },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:32:26.077Z",
+      "updated": "2025-08-08T15:33:39.700Z",
       "description": "Tasks for master context"
     }
   }
