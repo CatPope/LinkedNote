@@ -318,7 +318,7 @@
         "dependencies": [
           6
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -491,39 +491,48 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Set Up User Authentication Database Schema",
-            "description": "Create the necessary database tables and columns to store user information, including credentials and session data.",
+            "title": "설정 창 HTML/CSS 생성",
+            "description": "API 키를 입력할 수 있는 입력 필드와 저장 버튼이 포함된 간단한 HTML/CSS 파일을 생성합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "The `users` table should include columns for `id` (primary key), `email` (unique), `password_hash` (string), `created_at`, and `updated_at`. Use a database migration tool to manage schema changes and ensure version control.",
-            "status": "pending",
-            "testStrategy": "Verify the migration script runs successfully against a test database. Manually inspect the schema to confirm all tables, columns, and constraints (e.g., unique, not null) are created as specified."
+            "parentTaskId": 10
           },
           {
             "id": 2,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create a public API endpoint (e.g., `POST /api/register`) that allows new users to create an account.",
-            "dependencies": [],
-            "details": "The endpoint must validate incoming data (e.g., valid email format, password complexity). It should check for existing users to prevent duplicate emails. Use a strong hashing algorithm like bcrypt to hash the password before storing it in the database. Return a 201 status code on success.",
+            "title": "설정 창 로드 및 표시",
+            "description": "Electron의 `BrowserWindow`를 사용하여 설정 창을 로드하고 표시합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write unit tests for the validation logic. Write integration tests to confirm a new user is created in the database with a correctly hashed password. Test failure cases, such as submitting a duplicate email or invalid data, ensuring correct error codes are returned."
+            "dependencies": [],
+            "parentTaskId": 10
           },
           {
             "id": 3,
-            "title": "Develop User Login API Endpoint and Token Generation",
-            "description": "Create an API endpoint (e.g., `POST /api/login`) for users to authenticate and receive a session token.",
-            "dependencies": [],
-            "details": "The endpoint should accept an email and password. It must find the user by email and securely compare the provided password with the stored hash. Upon successful authentication, generate a secure JSON Web Token (JWT) with a reasonable expiration time and return it to the client.",
+            "title": "API 키 저장 로직 구현",
+            "description": "입력된 API 키를 로컬 파일(예: `config.json`)에 저장하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for successful login attempts, verifying a valid JWT is returned. Test failed login attempts with incorrect passwords or non-existent emails, ensuring a 401 Unauthorized status is returned. Unit test the JWT generation and password comparison logic separately."
+            "dependencies": [],
+            "parentTaskId": 10
           },
           {
             "id": 4,
-            "title": "Implement Authentication Middleware for Protected Routes",
-            "description": "Create middleware to verify the JWT on incoming requests to protected API endpoints, denying access to unauthenticated users.",
-            "dependencies": [],
-            "details": "The middleware should extract the JWT from the `Authorization` header. It must validate the token's signature and expiration. If valid, attach the user's identity to the request context for use in protected route handlers. If invalid, it must immediately respond with a 401 or 403 error.",
+            "title": "API 키 로드 로직 구현",
+            "description": "애플리케이션 시작 시 저장된 API 키를 로드하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Create a sample protected endpoint. Write integration tests that call this endpoint with a valid token, an expired token, a malformed token, and no token. Assert that access is correctly granted or denied in each scenario."
+            "dependencies": [],
+            "parentTaskId": 10
+          },
+          {
+            "id": 5,
+            "title": "트레이 메뉴에 설정 창 연결",
+            "description": "시스템 트레이 메뉴의 \"설정\" 항목을 클릭했을 때 설정 창이 열리도록 연결합니다.",
+            "details": "",
+            "status": "pending",
+            "dependencies": [],
+            "parentTaskId": 10
           }
         ]
       },
@@ -840,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:30:00.049Z",
+      "updated": "2025-08-08T15:32:26.077Z",
       "description": "Tasks for master context"
     }
   }
