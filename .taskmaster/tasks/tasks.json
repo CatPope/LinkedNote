@@ -631,7 +631,7 @@
             "title": "마이그레이션 스크립트 생성",
             "description": "`users` 테이블의 `openai_api_key` 컬럼을 암호화된 문자열을 저장할 수 있도록 수정하는 마이그레이션 스크립트를 생성합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 12
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:50:35.807Z",
+      "updated": "2025-08-08T15:51:46.042Z",
       "description": "Tasks for master context"
     }
   }
