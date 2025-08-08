@@ -20,11 +20,10 @@ app.whenReady().then(() => {
   // 트레이 아이콘 설정
   tray = new Tray(__dirname + '/assets/icons/icon.png') // 아이콘 경로 설정
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
-    { label: 'Item2', type: 'radio', checked: true },
-    { label: 'Item3', type: 'radio' }
+    { label: '설정', click: () => { /* 설정 창 열기 로직 */ } },
+    { label: '종료', click: () => app.quit() }
   ])
-  tray.setToolTip('This is my application.')
+  tray.setToolTip('LinkedNote')
   tray.setContextMenu(contextMenu)
 
   app.on('activate', () => {
