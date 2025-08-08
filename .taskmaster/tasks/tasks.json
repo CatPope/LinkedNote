@@ -35,7 +35,7 @@
             "description": "Create an API endpoint (e.g., `POST /api/auth/login`) for users to authenticate and receive an access token.",
             "dependencies": [],
             "details": "The endpoint should accept a username/email and a password. It will verify the credentials by comparing the provided password with the stored hash. Upon successful authentication, generate a JSON Web Token (JWT) containing the user ID and an expiration date. The JWT should be signed with a secret key stored in environment variables.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests for the password verification logic. Write integration tests for the login endpoint with both valid and invalid credentials. Verify that a valid JWT is returned in the response body on successful login and that a 401 Unauthorized error is returned for failed attempts."
           },
           {
@@ -46,15 +46,6 @@
             "details": "The middleware should extract the JWT from the `Authorization` header (e.g., `Bearer <token>`). It must then validate the token's signature and check its expiration. If the token is valid, the user's information (e.g., user ID) should be attached to the request object for use by subsequent handlers. If the token is invalid or missing, the middleware should return a 401 Unauthorized error.",
             "status": "pending",
             "testStrategy": "Write integration tests for a sample protected endpoint. Test cases should include requests with a valid token, an invalid/expired token, a malformed token, and no token, verifying the correct HTTP status code (200 or 401) is returned for each case."
-          },
-          {
-            "id": 6,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create a public API endpoint (e.g., POST /api/register) that allows new users to sign up for an account.",
-            "dependencies": [],
-            "details": "The endpoint should accept an email and password. It must validate the input, check for an existing email, hash the password using bcrypt, and store the new user record in the database.",
-            "status": "pending",
-            "testStrategy": "Write integration tests to cover successful registration, registration with a duplicate email, and registration with invalid input data (e.g., weak password)."
           },
           {
             "id": 7,
@@ -839,7 +830,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:43:44.427Z",
+      "updated": "2025-08-08T14:45:08.970Z",
       "description": "Tasks for master context"
     }
   }
