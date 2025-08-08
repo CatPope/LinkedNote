@@ -275,7 +275,7 @@
             "title": "requests 및 BeautifulSoup4 설치",
             "description": "웹 요청 및 HTML 파싱을 위한 라이브러리(`requests`, `BeautifulSoup4`)를 설치합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 6
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:04:57.562Z",
+      "updated": "2025-08-08T15:06:03.559Z",
       "description": "Tasks for master context"
     }
   }
