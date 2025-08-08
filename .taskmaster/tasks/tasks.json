@@ -26,7 +26,7 @@
             "description": "Create a public API endpoint (e.g., `POST /api/auth/register`) that allows new users to create an account.",
             "dependencies": [],
             "details": "The endpoint should accept a username, email, and password. It must validate the input (e.g., check for existing username/email, enforce password complexity). Hash the password using a strong algorithm like bcrypt before storing it in the database. Return a success message or user object upon successful registration.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests to validate input handling (valid, invalid, duplicate data). Write an integration test to simulate a POST request and verify that a new user record is created in the database with a correctly hashed password and a 201 status code is returned."
           },
           {
@@ -46,15 +46,6 @@
             "details": "The middleware should extract the JWT from the `Authorization` header (e.g., `Bearer <token>`). It must then validate the token's signature and check its expiration. If the token is valid, the user's information (e.g., user ID) should be attached to the request object for use by subsequent handlers. If the token is invalid or missing, the middleware should return a 401 Unauthorized error.",
             "status": "pending",
             "testStrategy": "Write integration tests for a sample protected endpoint. Test cases should include requests with a valid token, an invalid/expired token, a malformed token, and no token, verifying the correct HTTP status code (200 or 401) is returned for each case."
-          },
-          {
-            "id": 5,
-            "title": "Design and Create User Database Schema",
-            "description": "Define and create the necessary database table(s) to store user information, including credentials and profile data.",
-            "dependencies": [],
-            "details": "Create a 'users' table with columns for id (primary key), email (unique), hashed_password, created_at, and updated_at. Use a migration tool to manage schema changes.",
-            "status": "pending",
-            "testStrategy": "Verify the table and columns are created correctly in the development database. Write a unit test to ensure the User model can be instantiated and saved."
           },
           {
             "id": 6,
@@ -848,7 +839,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:42:13.584Z",
+      "updated": "2025-08-08T14:43:44.427Z",
       "description": "Tasks for master context"
     }
   }
