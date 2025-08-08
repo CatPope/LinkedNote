@@ -6,6 +6,7 @@ const { readConfig, writeConfig } = require('./src/main/config-manager');
 let tray = null
 let mainWindow = null
 let settingsWindow = null
+let openaiApiKey = null;
 
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -72,6 +73,10 @@ app.whenReady().then(() => {
 
   startMonitoring();
 
+  // 애플리케이션 시작 시 API 키 로드
+  const config = readConfig();
+  openaiApiKey = config.openaiApiKey;
+
   clipboardEmitter.on('url-detected', (url) => {
     console.log('URL detected in main.js:', url);
     showNotification('URL 감지됨', `클립보드에서 URL이 감지되었습니다: ${url}`, () => {
@@ -82,14 +87,14 @@ app.whenReady().then(() => {
 
   // IPC 통신 핸들러
   ipcMain.on('request-api-key', (event) => {
-    const config = readConfig();
-    event.sender.send('send-api-key', config.openaiApiKey);
+    event.sender.send('send-api-key', openaiApiKey);
   });
 
   ipcMain.on('save-api-key', (event, apiKey) => {
     const config = readConfig();
     config.openaiApiKey = apiKey;
     writeConfig(config);
+    openaiApiKey = apiKey;
   });
 
   app.on('window-all-closed', () => {
