@@ -168,7 +168,7 @@
         "dependencies": [
           3
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -213,39 +213,39 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Set Up User Database Schema",
-            "description": "Create the necessary database tables to store user information, including credentials and profile data.",
+            "title": "/summarize 엔드포인트 정의",
+            "description": "`backend/api/summarize.py` 파일을 생성하여 `/api/summarize` 엔드포인트를 정의합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Define a 'users' table with columns for id, email, username, password_hash, created_at, and updated_at. Ensure email and username have unique constraints. Use a database migration tool like Alembic or Flyway to version the schema.",
-            "status": "pending",
-            "testStrategy": "Run the migration against a test database and verify that the table and its columns are created correctly. Write model-level tests to confirm unique constraints are enforced."
+            "parentTaskId": 5
           },
           {
             "id": 2,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create a public API endpoint (e.g., POST /api/register) that allows new users to sign up for the service.",
-            "dependencies": [],
-            "details": "The endpoint should accept an email, username, and password. It must validate the input (e.g., password strength, valid email format), hash the password using bcrypt, and store the new user record in the database. Return a success message or user object, excluding the password hash.",
+            "title": "요약 요청 스키마 정의",
+            "description": "`backend/schemas/summary.py` 파일을 생성하여 요약 요청 및 응답에 대한 Pydantic 스키마를 정의합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for successful registration, registration with a duplicate email/username, and registration with invalid input (e.g., weak password). Verify that the password stored in the database is properly hashed."
+            "dependencies": [],
+            "parentTaskId": 5
           },
           {
             "id": 3,
-            "title": "Implement User Login and Token Generation",
-            "description": "Create an API endpoint (e.g., POST /api/login) for users to authenticate and receive an access token.",
-            "dependencies": [],
-            "details": "The endpoint should accept user credentials. It must find the user by email/username, compare the provided password with the stored hash using bcrypt. On success, generate a signed JSON Web Token (JWT) with a reasonable expiration time and user claims (e.g., user_id).",
+            "title": "모의 요약 로직 구현",
+            "description": "`backend/services/summarizer.py` 파일을 생성하여 초기에는 하드코딩된 또는 모의 요약 응답을 반환하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for successful login with correct credentials, failed login with an incorrect password, and failed login for a non-existent user. Unit test the JWT generation logic to ensure the payload and signature are correct."
+            "dependencies": [],
+            "parentTaskId": 5
           },
           {
             "id": 4,
-            "title": "Create Middleware for Protecting Routes",
-            "description": "Implement authentication middleware to secure specific API endpoints, making them accessible only to authenticated users.",
-            "dependencies": [],
-            "details": "The middleware should extract the JWT from the 'Authorization' header of incoming requests. It must validate the token's signature and expiration. If valid, decode the payload and attach the user's identity to the request context. If invalid, it must return a 401 Unauthorized error.",
+            "title": "main.py에 라우터 포함",
+            "description": "`main.py`에서 새로 생성된 요약 라우터를 포함합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Test a protected endpoint by making requests with a valid token, an expired token, a malformed token, and no token. Verify that the correct HTTP status codes (e.g., 200, 401) are returned in each case."
+            "dependencies": [],
+            "parentTaskId": 5
           }
         ]
       },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:58:58.435Z",
+      "updated": "2025-08-08T15:00:35.710Z",
       "description": "Tasks for master context"
     }
   }
