@@ -1,6 +1,7 @@
-const { clipboard } = require('electron');
+const { clipboard, EventEmitter } = require('electron');
 
 let lastClipboardText = '';
+const clipboardEmitter = new EventEmitter();
 
 function isValidUrl(text) {
   try {
@@ -18,7 +19,7 @@ function startMonitoring(interval = 1000) {
       lastClipboardText = currentClipboardText;
       if (isValidUrl(currentClipboardText)) {
         console.log('Valid URL detected:', currentClipboardText);
-        // 여기에 URL 감지 시 이벤트 발생 로직 추가
+        clipboardEmitter.emit('url-detected', currentClipboardText);
       } else {
         console.log('Non-URL text detected:', currentClipboardText);
       }
@@ -26,4 +27,4 @@ function startMonitoring(interval = 1000) {
   }, interval);
 }
 
-module.exports = { startMonitoring };
+module.exports = { startMonitoring, clipboardEmitter };

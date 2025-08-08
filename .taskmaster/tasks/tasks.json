@@ -143,7 +143,7 @@
             "title": "URL 감지 시 이벤트 발생 및 로깅",
             "description": "유효한 URL이 감지되면 특정 이벤트를 발생시키고, 감지된 URL을 로깅합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 3
           },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:54:12.423Z",
+      "updated": "2025-08-08T14:55:03.003Z",
       "description": "Tasks for master context"
     }
   }
