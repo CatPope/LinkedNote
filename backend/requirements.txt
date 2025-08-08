@@ -1,9 +1,4 @@
-fastapi==0.111.0
-sqlalchemy==2.0.30
-uvicorn[standard]==0.29.0
-PyJWT==2.8.0
-passlib[bcrypt]==1.7.4
-requests==2.32.3
-beautifulsoup4==4.12.3
-openai==1.35.13
-cryptography==42.0.8
+fastapi
+uvicorn
+sqlalchemy
+alembic

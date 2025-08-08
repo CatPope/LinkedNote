@@ -1,9 +1,9 @@
 {
 	"meta": {
-		"generatedAt": "2025-08-06T11:54:05.101Z",
-		"tasksAnalyzed": 20,
-		"totalTasks": 20,
-		"analysisCount": 20,
+		"generatedAt": "2025-08-08T14:19:20.405Z",
+		"tasksAnalyzed": 15,
+		"totalTasks": 15,
+		"analysisCount": 15,
 		"thresholdScore": 5,
 		"projectName": "Taskmaster",
 		"usedResearch": true
@@ -11,163 +11,123 @@
 	"complexityAnalysis": [
 		{
 			"taskId": 1,
-			"taskTitle": "Setup Electron & FastAPI Project Structure",
-			"complexityScore": 3,
+			"taskTitle": "Setup Project Structure and Repositories",
+			"complexityScore": 2,
 			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break down the setup of a monorepo for Electron and FastAPI. Include steps for directory creation, basic dependency setup for both, and initial 'hello world' verification for each.",
-			"reasoning": "This task involves setting up two distinct technology stacks within a monorepo, requiring separate dependency management (npm/yarn for Electron, pip/poetry for FastAPI) and initial 'hello world' verification for both. It's foundational but straightforward."
+			"expansionPrompt": "Break down the project setup into steps for creating the root directory, initializing the Electron app, initializing the FastAPI backend, and setting up version control.",
+			"reasoning": "This is a foundational setup task with low technical complexity. It involves basic file system operations and standard package manager commands, which are well-defined and straightforward."
 		},
 		{
 			"taskId": 2,
-			"taskTitle": "Implement System Tray Icon and Menu",
-			"complexityScore": 4,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Detail the steps to implement an Electron system tray icon with a right-click context menu. Include icon loading, menu item creation ('Settings', 'Quit'), and event handling for 'Quit'.",
-			"reasoning": "Requires using Electron's specific Tray API, handling menu item creation, associating actions (like 'Quit'), and ensuring the icon is correctly loaded from assets. It's a common Electron pattern but involves multiple small steps."
+			"taskTitle": "Phase 1: Implement Electron System Tray Integration",
+			"complexityScore": 5,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Detail the steps for implementing Electron system tray integration, including setting up the main process, creating the tray icon, defining the context menu, handling application lifecycle, and ensuring cross-platform compatibility.",
+			"reasoning": "Requires understanding of Electron's main process, `Tray` and `Menu` modules. While the core functionality is provided by Electron, ensuring consistent behavior and appearance across Windows, macOS, and Linux can introduce moderate complexity."
 		},
 		{
 			"taskId": 3,
-			"taskTitle": "Develop Clipboard Monitoring Service for URL Detection",
-			"complexityScore": 5,
+			"taskTitle": "Phase 1: Implement Automatic Clipboard Monitoring",
+			"complexityScore": 6,
 			"recommendedSubtasks": 5,
-			"expansionPrompt": "Outline the development of an Electron main process service for continuous clipboard monitoring. Include steps for using Electron's clipboard API, implementing robust URL detection with regex, and emitting events upon detection.",
-			"reasoning": "Involves continuous background processing, careful use of Electron's clipboard API, and robust regular expression implementation for URL detection. Performance and resource usage need consideration for a persistent service."
+			"expansionPrompt": "Outline the subtasks for implementing automatic clipboard monitoring, focusing on continuous polling, robust URL pattern matching, performance optimization (under 0.5s detection), and handling various clipboard contents.",
+			"reasoning": "Electron's clipboard API is simple, but the requirements for 'continuously monitor' and 'performance optimized' (0.5s detection) elevate complexity. Robust URL detection and efficient background polling are key challenges."
 		},
 		{
 			"taskId": 4,
-			"taskTitle": "Implement System Notification on URL Detection",
-			"complexityScore": 3,
+			"taskTitle": "Phase 1: Implement System Tray Notifications",
+			"complexityScore": 4,
 			"recommendedSubtasks": 3,
-			"expansionPrompt": "Break down the implementation of an OS-native system notification in Electron. Focus on triggering the notification upon URL detection, setting its title and auto-dismiss property.",
-			"reasoning": "Direct use of Electron's Notification API. The main work is connecting it to the event from Task 3 and setting properties like title and auto-dismiss. Relatively simple once the event source is ready."
+			"expansionPrompt": "List the steps to implement system tray notifications, covering integration with URL detection, using Electron's Notification API, making notifications clickable, and testing cross-platform behavior.",
+			"reasoning": "Electron's `Notification` API is generally straightforward. The main considerations are integrating with the URL detection logic and ensuring the click action is handled correctly across different operating systems."
 		},
 		{
 			"taskId": 5,
-			"taskTitle": "Create Initial Popup Window (300x200px) with Mode Selection UI",
-			"complexityScore": 4,
+			"taskTitle": "Phase 1: Setup FastAPI Backend with /summarize Endpoint",
+			"complexityScore": 3,
 			"recommendedSubtasks": 4,
-			"expansionPrompt": "Detail the steps to create an Electron popup window with fixed dimensions. Include creating the BrowserWindow, loading its content, and implementing the UI for mode selection (radio buttons) and a 'Summarize' button.",
-			"reasoning": "Involves creating a new Electron BrowserWindow instance with specific dimensions, loading an HTML file, and implementing basic UI elements (radio buttons, button) with associated frontend logic. Standard Electron UI development."
+			"expansionPrompt": "Break down the setup of the FastAPI backend into steps: project initialization, defining the `/api/summarize` endpoint, implementing a mock response, and adding basic request validation and error handling.",
+			"reasoning": "FastAPI is designed for rapid API development. The initial endpoint with mock data and basic error handling is a relatively low-complexity task, following standard web API patterns."
 		},
 		{
 			"taskId": 6,
-			"taskTitle": "Implement Backend Web Scraping Service",
-			"complexityScore": 6,
+			"taskTitle": "Phase 1: Implement Web Content Scraper",
+			"complexityScore": 8,
 			"recommendedSubtasks": 6,
-			"expansionPrompt": "Outline the development of a robust web scraping service in FastAPI. Include steps for fetching HTML with `requests`, parsing content with `BeautifulSoup4` for common article tags, implementing error handling (timeouts), and writing unit tests.",
-			"reasoning": "Web scraping can be brittle; robustly extracting main content from diverse websites is non-trivial. Requires careful parsing logic, error handling (timeouts, network issues, malformed HTML), and thorough testing to ensure reliability."
+			"expansionPrompt": "Detail the subtasks for building a robust web content scraper, including setting up `requests` and `BeautifulSoup4`, developing logic to identify and extract main article text, handling common scraping issues (timeouts, user-agents), and implementing comprehensive error handling.",
+			"reasoning": "Web scraping is inherently complex due to the variability of website structures, dynamic content, and anti-scraping measures. Reliably extracting 'main text content' while ignoring boilerplate across diverse sites is a significant challenge, requiring robust parsing and error handling."
 		},
 		{
 			"taskId": 7,
-			"taskTitle": "Create MVP /api/summarize Endpoint (No AI)",
-			"complexityScore": 4,
-			"recommendedSubtasks": 3,
-			"expansionPrompt": "Break down the creation of an MVP FastAPI endpoint `/api/summarize`. Include defining the route, handling URL and mode parameters, integrating with the web scraper service, and returning a placeholder JSON response.",
-			"reasoning": "Setting up a FastAPI endpoint is straightforward. The main part is defining the route, handling request body parsing, calling an internal service (scraper), and returning a structured JSON response. Good for establishing basic API contract."
+			"taskTitle": "Phase 2: Integrate OpenAI API for Summarization",
+			"complexityScore": 6,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Outline the steps for integrating the OpenAI API, including installing the client, implementing API calls for different summarization modes, defining and using specific prompts, and handling various API errors (e.g., rate limits, authentication).",
+			"reasoning": "Integrating with a well-documented API like OpenAI is generally manageable. The complexity arises from handling different prompt types, managing API keys (even if storage is later), and implementing robust error handling for API responses."
 		},
 		{
 			"taskId": 8,
-			"taskTitle": "Establish IPC between Electron Frontend and FastAPI Backend",
-			"complexityScore": 5,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Detail the steps to establish secure IPC between the Electron frontend and local FastAPI backend. Focus on using a preload script for `fetch` calls, handling button clicks to trigger API requests, and verifying communication.",
-			"reasoning": "Involves cross-process communication, which requires careful setup. Using a preload script for security is a best practice but adds a layer of complexity. Ensuring the FastAPI server is running and accessible from Electron is also key."
+			"taskTitle": "Phase 2: Create UI for Interaction and Results",
+			"complexityScore": 7,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break down the UI creation into subtasks: designing and implementing the selection popup, designing and implementing the results window, setting up inter-process communication (IPC) for window management and data transfer, implementing loading states, and ensuring basic styling and layout.",
+			"reasoning": "Electron UI development involves managing multiple windows, inter-process communication (IPC), and handling user flow. Creating two distinct windows with specific dimensions, interactions, and data exchange adds significant complexity beyond a single-window application."
 		},
 		{
 			"taskId": 9,
-			"taskTitle": "Integrate OpenAI API into Backend Summarizer Service",
-			"complexityScore": 6,
-			"recommendedSubtasks": 6,
-			"expansionPrompt": "Outline the integration of the OpenAI API into the backend summarizer service. Include steps for installing the library, making API calls with scraped text, handling API key management, and implementing error handling for OpenAI responses.",
-			"reasoning": "Integrating with an external API, especially a complex one like OpenAI, involves API key management, request/response formatting, specific error handling, and potentially rate limiting. Requires careful setup and testing."
+			"taskTitle": "Phase 2: Automatically Copy Results to Clipboard",
+			"complexityScore": 2,
+			"recommendedSubtasks": 2,
+			"expansionPrompt": "Detail the steps for automatically copying results to the clipboard, including identifying the trigger point in the UI flow and using Electron's clipboard API.",
+			"reasoning": "This is a very low-complexity task, as Electron provides a direct and simple API for clipboard operations. It's essentially a single function call."
 		},
 		{
 			"taskId": 10,
-			"taskTitle": "Implement All Three Summarization Modes (Summary, Tags, Full)",
+			"taskTitle": "Phase 2: Create Settings Window for API Key",
 			"complexityScore": 5,
 			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break down the implementation of multiple summarization modes within the `/api/summarize` endpoint. Focus on mapping input modes to specific OpenAI prompts and ensuring the output format aligns with each mode's requirements.",
-			"reasoning": "Primarily involves adding conditional logic within the existing `/api/summarize` endpoint. The complexity comes from correctly mapping modes to specific OpenAI prompts and ensuring the output format aligns with expectations for each mode."
+			"expansionPrompt": "Outline the subtasks for creating the settings window: designing the window layout, implementing the API key input field and save button, handling local file storage for the key, and integrating access from the system tray menu.",
+			"reasoning": "Involves creating an Electron window, handling user input, and performing basic local file I/O. While the storage is unencrypted in this phase, it still requires proper UI and data persistence logic."
 		},
 		{
 			"taskId": 11,
-			"taskTitle": "Develop Results Display Window (600x400px)",
+			"taskTitle": "Phase 3: Setup SQLite Database and Schema",
 			"complexityScore": 4,
 			"recommendedSubtasks": 4,
-			"expansionPrompt": "Detail the steps to create a new Electron window for displaying summarization results. Include creating the BrowserWindow with specified dimensions, passing the summarized content to it, and rendering the content.",
-			"reasoning": "Similar to creating the initial popup window, but this one needs to receive and display dynamic content passed from the main process. This involves inter-process communication for data transfer."
+			"expansionPrompt": "Break down the SQLite database setup into steps: choosing a Python library/ORM, defining the `users` table schema, defining the `summaries` table schema, and implementing database initialization logic (file creation, table creation).",
+			"reasoning": "Standard database setup using SQLite. Python's built-in `sqlite3` module or a lightweight ORM makes this relatively straightforward for defining and creating tables."
 		},
 		{
 			"taskId": 12,
-			"taskTitle": "Implement Automatic Clipboard Copying of Results",
-			"complexityScore": 3,
-			"recommendedSubtasks": 2,
-			"expansionPrompt": "Outline the implementation of automatic clipboard copying for summarization results. Focus on using Electron's `clipboard.writeText()` after receiving the API response and before displaying the results window.",
-			"reasoning": "Direct use of Electron's `clipboard` API. The main point is timing it correctly after the summary is received and before the result window is shown to the user."
+			"taskTitle": "Phase 3: Implement AES-256 Encryption for API Key",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Detail the subtasks for implementing AES-256 encryption for the API key: selecting a cryptography library, defining a secure key management strategy, implementing encryption and decryption functions, integrating these into the API key save/retrieval flow, and testing the roundtrip.",
+			"reasoning": "Cryptography implementation is inherently complex and prone to errors if not handled carefully. Securely managing encryption keys, implementing the correct AES-256 mode, and ensuring data integrity during encryption/decryption is a high-complexity task, requiring expert knowledge or careful use of robust libraries."
 		},
 		{
 			"taskId": 13,
-			"taskTitle": "Create Settings Window UI for API Key Input",
+			"taskTitle": "Phase 3: Implement Summary History",
 			"complexityScore": 4,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break down the creation of the Electron settings window UI. Include steps for creating the window, designing the API key input field and save button, and enabling the 'Settings' menu item in the tray.",
-			"reasoning": "Involves creating a new Electron BrowserWindow, designing a simple form with an input field and button, and enabling a previously disabled menu item. Standard UI development."
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Outline the steps for implementing summary history: integrating with the summarization success callback, preparing data for the `summaries` table, and implementing database insertion logic with error handling.",
+			"reasoning": "This is a straightforward data persistence task. The main work involves integrating with the existing summarization flow and performing a standard database write operation."
 		},
 		{
 			"taskId": 14,
-			"taskTitle": "Setup SQLite Database with `users` and `summaries` Schema",
-			"complexityScore": 5,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Outline the setup of a SQLite database for the FastAPI backend. Include steps for configuring SQLAlchemy, defining models for `users` and `summaries` tables with specified columns, and ensuring database initialization.",
-			"reasoning": "Setting up a database with an ORM like SQLAlchemy involves defining models, configuring the connection, and ensuring the database file and tables are correctly created on application startup. Requires understanding of database schema design."
+			"taskTitle": "Phase 4: UI/UX Polish and Refinement",
+			"complexityScore": 9,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break down UI/UX polish into subtasks: refining overall styling for native feel, implementing consistent loading indicators, developing comprehensive error message displays, optimizing UI rendering performance, conducting internal UI/UX reviews, and implementing minor usability improvements.",
+			"reasoning": "UI/UX polish is often an open-ended and iterative process. Achieving a 'native feel,' robust error handling across all scenarios, and meeting strict responsiveness targets requires significant attention to detail, cross-platform testing, and potentially performance profiling."
 		},
 		{
 			"taskId": 15,
-			"taskTitle": "Implement AES-256 Encryption for API Key Storage",
-			"complexityScore": 7,
-			"recommendedSubtasks": 7,
-			"expansionPrompt": "Detail the implementation of AES-256 encryption for API key storage in the backend. Include steps for selecting a cryptography library, generating/managing encryption keys, encrypting/decrypting the API key, and integrating this into the database save/load process.",
-			"reasoning": "Security-related tasks are inherently more complex. Implementing encryption correctly (key management, IVs, proper library usage, secure storage of encryption key) is critical and requires careful attention to detail and best practices to avoid vulnerabilities."
-		},
-		{
-			"taskId": 16,
-			"taskTitle": "Implement Persistence for Summary History",
-			"complexityScore": 5,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break down the implementation of summary history persistence. Focus on integrating with the SQLite database from the `/api/summarize` endpoint, mapping summarization results to the `summaries` table, and performing database write operations.",
-			"reasoning": "This involves integrating with the database layer (Task 14) from the `/api/summarize` endpoint. It's a data persistence task, requiring proper ORM usage, data mapping, and error handling for database operations."
-		},
-		{
-			"taskId": 17,
-			"taskTitle": "Develop UI to View Summary History",
-			"complexityScore": 6,
-			"recommendedSubtasks": 6,
-			"expansionPrompt": "Outline the development of a UI component to view summary history. Include steps for creating a backend API endpoint to retrieve history, and implementing the frontend logic in the settings window to fetch and display this data in a scrollable list.",
-			"reasoning": "This task has both backend (new API endpoint to fetch history) and frontend (displaying a list, potentially with pagination/sorting) components. Fetching data from the backend and rendering it in a scrollable list adds complexity."
-		},
-		{
-			"taskId": 18,
-			"taskTitle": "Refine UI/UX, Add Loading States and Error Handling",
+			"taskTitle": "Phase 4: Application Packaging and Distribution",
 			"complexityScore": 8,
-			"recommendedSubtasks": 8,
-			"expansionPrompt": "Detail the refinement of UI/UX, including adding loading states and comprehensive error handling. Focus on identifying key interaction points, implementing visual feedback (spinners), and designing user-friendly error messages for various failure scenarios across the application.",
-			"reasoning": "This is a significant cross-cutting concern affecting multiple parts of the application. It requires identifying all user interaction points, implementing consistent visual feedback (spinners), and robust, user-friendly error handling across both frontend and backend interactions. Often underestimated in scope."
-		},
-		{
-			"taskId": 19,
-			"taskTitle": "Optimize Performance and Add Comprehensive Logging",
-			"complexityScore": 7,
-			"recommendedSubtasks": 7,
-			"expansionPrompt": "Outline the optimization of application performance and addition of comprehensive logging. Include steps for profiling key operations (e.g., clipboard monitoring), implementing structured logging for both Electron and FastAPI, and defining log levels for different event types.",
-			"reasoning": "Performance optimization can be deep and requires profiling to identify bottlenecks. Comprehensive logging is also a cross-cutting concern, requiring consistent implementation across both Electron and FastAPI, and careful consideration of log levels and content for effective debugging and monitoring."
-		},
-		{
-			"taskId": 20,
-			"taskTitle": "Create Application Installers for Cross-Platform Deployment",
-			"complexityScore": 7,
-			"recommendedSubtasks": 7,
-			"expansionPrompt": "Detail the creation of cross-platform application installers using `electron-builder`. Include steps for configuring `electron-builder.config.js` for Windows, macOS, and Linux, adding build scripts, and ensuring proper bundling of assets and dependencies.",
-			"reasoning": "While `electron-builder` simplifies much, configuring it for cross-platform (Windows, macOS, Linux) with specific icons, signing (for macOS/Windows), and ensuring all dependencies are bundled correctly can be challenging and time-consuming. Requires testing on multiple OSes."
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Detail the subtasks for application packaging and distribution: setting up Electron's packaging tools, configuring builds for Windows, macOS, and Linux, implementing code signing, writing a basic README/user guide, and thoroughly testing installation and functionality on each target OS.",
+			"reasoning": "Cross-platform application packaging, especially for Electron, can be complex due to platform-specific requirements, code signing, and dependency management. Ensuring robust installers and successful deployment on various target systems is a non-trivial task that often encounters environment-specific issues."
 		}
 	]
 }
