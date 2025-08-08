@@ -44,17 +44,8 @@
             "description": "Implement middleware that can be applied to API routes to ensure they are only accessible by authenticated users.",
             "dependencies": [],
             "details": "The middleware should extract the JWT from the `Authorization` header (e.g., `Bearer <token>`). It must then validate the token's signature and check its expiration. If the token is valid, the user's information (e.g., user ID) should be attached to the request object for use by subsequent handlers. If the token is invalid or missing, the middleware should return a 401 Unauthorized error.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write integration tests for a sample protected endpoint. Test cases should include requests with a valid token, an invalid/expired token, a malformed token, and no token, verifying the correct HTTP status code (200 or 401) is returned for each case."
-          },
-          {
-            "id": 7,
-            "title": "Develop User Login API Endpoint with JWT",
-            "description": "Create a public API endpoint (e.g., POST /api/login) for users to authenticate and receive a JSON Web Token (JWT).",
-            "dependencies": [],
-            "details": "The endpoint should accept an email and password. It will find the user, compare the provided password with the stored hash, and if they match, generate a signed JWT containing the user ID and an expiration claim.",
-            "status": "pending",
-            "testStrategy": "Write integration tests for successful login with correct credentials, failed login with incorrect password, and failed login for a non-existent user. Verify a valid JWT is returned on success."
           },
           {
             "id": 8,
@@ -830,7 +821,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:45:08.970Z",
+      "updated": "2025-08-08T14:45:56.532Z",
       "description": "Tasks for master context"
     }
   }
