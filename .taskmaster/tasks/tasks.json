@@ -118,7 +118,7 @@
         "dependencies": [
           2
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -172,30 +172,30 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Develop Backend API for User Authentication",
-            "description": "Create secure RESTful API endpoints for user registration, login, and logout. This includes password hashing and JWT generation.",
+            "title": "알림 모듈 생성",
+            "description": "Electron의 `Notification` API를 사용하여 알림을 표시하는 모듈을 생성합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Use a backend framework like Express.js. The registration endpoint should accept user credentials, hash the password using bcrypt, and store the user in a database. The login endpoint should validate credentials and return a JSON Web Token (JWT). Implement a protected endpoint to verify token validity.",
-            "status": "pending",
-            "testStrategy": "Write unit tests for the authentication logic (password hashing, token generation). Use an API testing tool like Postman or Insomnia to perform integration tests on the live endpoints, verifying correct responses, status codes, and error handling."
+            "parentTaskId": 4
           },
           {
             "id": 2,
-            "title": "Build Frontend UI for Authentication Forms",
-            "description": "Develop the user interface components for the registration and login pages. The forms must include input fields, client-side validation, and user feedback mechanisms.",
-            "dependencies": [],
-            "details": "Use a frontend framework like React or Vue. Create separate components for the Login and Registration forms. Implement state management for form inputs. Add client-side validation to check for required fields, email format, and password strength before submission. Style components for a responsive and user-friendly experience.",
+            "title": "알림 표시 로직 구현",
+            "description": "URL 감지 이벤트에 반응하여 알림을 표시하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Use a component workbench like Storybook to develop and visually test UI components in isolation. Write unit tests using a library like React Testing Library to verify component rendering and behavior based on user interaction."
+            "dependencies": [],
+            "parentTaskId": 4
           },
           {
             "id": 3,
-            "title": "Integrate Frontend with Backend Authentication API",
-            "description": "Connect the frontend forms to the backend API. Handle API requests, manage the user's authentication state using the received JWT, and implement protected routes.",
-            "dependencies": [],
-            "details": "Use a library like Axios to handle HTTP requests from the frontend to the backend. On successful login, securely store the JWT in the browser (e.g., HttpOnly cookie). Implement a global state management solution (e.g., Redux, Context API) to track authentication status. Create a mechanism (e.g., Higher-Order Component, Router Guard) to protect routes that require a valid user session.",
+            "title": "알림 클릭 이벤트 처리",
+            "description": "알림 클릭 시 특정 동작을 수행하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Perform end-to-end testing by manually running through the full user flow: registration, login, accessing a protected page, and logging out. Use browser developer tools to inspect network requests and verify that the JWT is being sent and received correctly. Mock API responses to test frontend logic in isolation from the live backend."
+            "dependencies": [],
+            "parentTaskId": 4
           }
         ]
       },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:55:50.382Z",
+      "updated": "2025-08-08T14:57:09.749Z",
       "description": "Tasks for master context"
     }
   }
