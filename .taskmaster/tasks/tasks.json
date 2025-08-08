@@ -604,7 +604,7 @@
             "title": "암호화/복호화 유틸리티 생성",
             "description": "`backend/core/encryption.py` 파일을 생성하여 AES-256 암호화 및 복호화 함수를 구현합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 12
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:46:07.661Z",
+      "updated": "2025-08-08T15:47:37.517Z",
       "description": "Tasks for master context"
     }
   }
