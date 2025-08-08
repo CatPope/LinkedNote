@@ -9,7 +9,7 @@
         "testStrategy": "Verify that the directory structure matches the PRD's `File Structure` section and that initial dependency files are present.",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -46,15 +46,6 @@
             "details": "The middleware should extract the JWT from the `Authorization` header (e.g., `Bearer <token>`). It must then validate the token's signature and check its expiration. If the token is valid, the user's information (e.g., user ID) should be attached to the request object for use by subsequent handlers. If the token is invalid or missing, the middleware should return a 401 Unauthorized error.",
             "status": "done",
             "testStrategy": "Write integration tests for a sample protected endpoint. Test cases should include requests with a valid token, an invalid/expired token, a malformed token, and no token, verifying the correct HTTP status code (200 or 401) is returned for each case."
-          },
-          {
-            "id": 8,
-            "title": "Implement Protected Route Middleware",
-            "description": "Create authentication middleware to protect specific API routes, requiring a valid JWT for access.",
-            "dependencies": [],
-            "details": "The middleware will inspect the 'Authorization' header for a 'Bearer' token. It will then verify the JWT's signature and expiration. If valid, it will attach the user's information to the request object for use in the route handler.",
-            "status": "pending",
-            "testStrategy": "Create a test-only protected endpoint. Write integration tests to verify it allows access with a valid token and returns a 401 Unauthorized error for requests with no token, an invalid token, or an expired token."
           }
         ]
       },
@@ -821,7 +812,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:45:56.532Z",
+      "updated": "2025-08-08T14:46:38.827Z",
       "description": "Tasks for master context"
     }
   }
