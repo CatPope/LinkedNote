@@ -352,7 +352,7 @@
             "title": "프롬프트 정의",
             "description": "요약, 태그, 전체 텍스트 추출을 위한 프롬프트를 정의합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 7
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:27:50.054Z",
+      "updated": "2025-08-08T15:28:55.418Z",
       "description": "Tasks for master context"
     }
   }

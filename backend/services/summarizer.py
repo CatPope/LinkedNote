@@ -12,6 +12,10 @@ def summarize_text_with_openai(text: str, mode: str) -> str:
         prompt = f"Summarize the following text concisely: {text}"
     elif mode == "detailed":
         prompt = f"Provide a detailed summary of the following text: {text}"
+    elif mode == "tags":
+        prompt = f"Extract relevant keywords or tags from the following text, separated by commas: {text}"
+    elif mode == "full":
+        prompt = f"Return the full text provided: {text}"
     else:
         return "Unsupported summary mode."
 
