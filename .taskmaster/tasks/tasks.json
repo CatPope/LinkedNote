@@ -571,7 +571,7 @@
             "title": "마이그레이션 실행",
             "description": "마이그레이션을 적용하여 데이터베이스 테이블을 생성합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 11
           }
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:41:39.036Z",
+      "updated": "2025-08-08T15:42:57.425Z",
       "description": "Tasks for master context"
     }
   }
