@@ -613,7 +613,7 @@
             "title": "API 키 암호화 저장",
             "description": "`backend/services/user.py`를 수정하여 API 키를 데이터베이스에 저장하기 전에 암호화합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 12
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:47:37.517Z",
+      "updated": "2025-08-08T15:49:10.608Z",
       "description": "Tasks for master context"
     }
   }
