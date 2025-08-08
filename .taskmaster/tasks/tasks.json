@@ -546,7 +546,7 @@
         "dependencies": [
           5
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -592,57 +592,57 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema",
-            "description": "Create the database table(s) to store user information, including username, email, hashed password, and timestamps.",
+            "title": "암호화 라이브러리 설치",
+            "description": "`cryptography` 파이썬 라이브러리를 설치합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Define a 'users' table with columns: id (primary key, auto-increment), email (unique, not null), password_hash (string, not null), created_at (timestamp), and updated_at (timestamp). Use a database migration tool to apply the schema.",
-            "status": "pending",
-            "testStrategy": "Verify the table and its columns are created correctly in the database. Test constraints like 'unique' on the email column by attempting to insert duplicate data and asserting failure."
+            "parentTaskId": 12
           },
           {
             "id": 2,
-            "title": "Implement Secure Password Hashing Service",
-            "description": "Create utility functions to securely hash passwords upon user registration and verify them during login.",
-            "dependencies": [],
-            "details": "Use a strong, salted hashing algorithm like bcrypt. Create two functions: `hashPassword(plainTextPassword)` which returns a hash, and `comparePassword(plainTextPassword, hashedPassword)` which returns a boolean. Ensure a proper salt round is configured (e.g., 12).",
+            "title": "암호화/복호화 유틸리티 생성",
+            "description": "`backend/core/encryption.py` 파일을 생성하여 AES-256 암호화 및 복호화 함수를 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write unit tests to confirm that `hashPassword` produces a valid, non-repeating hash for the same input. Test that `comparePassword` correctly returns true for a matching password and false for a non-matching one."
+            "dependencies": [],
+            "parentTaskId": 12
           },
           {
             "id": 3,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create a public API endpoint (e.g., POST /api/auth/register) that allows new users to sign up.",
-            "dependencies": [],
-            "details": "The endpoint should accept email and password. It must validate the input (e.g., password complexity, valid email format), check if the email already exists, hash the password using the service from subtask 2, and save the new user to the database.",
+            "title": "API 키 암호화 저장",
+            "description": "`backend/services/user.py`를 수정하여 API 키를 데이터베이스에 저장하기 전에 암호화합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Use integration tests to hit the endpoint. Test the success case (201 Created). Test failure cases like duplicate email (409 Conflict), invalid email format (400 Bad Request), and weak password (400 Bad Request)."
+            "dependencies": [],
+            "parentTaskId": 12
           },
           {
             "id": 4,
-            "title": "Implement JWT Generation and Validation Service",
-            "description": "Create a service to generate JSON Web Tokens (JWTs) for authenticated users and to validate incoming tokens.",
-            "dependencies": [],
-            "details": "The generation function should accept a user ID as a payload and sign it with a secret key stored securely in environment variables. The validation function should verify the token's signature and check for expiration. Set a reasonable expiration time (e.g., 1h).",
+            "title": "API 키 복호화 로드",
+            "description": "`backend/services/user.py`를 수정하여 API 키를 사용할 때 복호화합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write unit tests. Test token generation. Test validation with a valid token, an expired token, a token with an invalid signature, and a malformed token, asserting the correct outcomes for each."
+            "dependencies": [],
+            "parentTaskId": 12
           },
           {
             "id": 5,
-            "title": "Develop User Login API Endpoint",
-            "description": "Create a public API endpoint (e.g., POST /api/auth/login) for users to authenticate and receive a token.",
-            "dependencies": [],
-            "details": "The endpoint should accept email and password. It will find the user in the database, use the service from subtask 2 to verify the password, and if successful, generate a JWT using the service from subtask 4 to return to the client in the response body.",
+            "title": "마이그레이션 스크립트 생성",
+            "description": "`users` 테이블의 `openai_api_key` 컬럼을 암호화된 문자열을 저장할 수 있도록 수정하는 마이그레이션 스크립트를 생성합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests. Test successful login with correct credentials, asserting a 200 OK status and the presence of a JWT in the response. Test failed login attempts with an incorrect password or non-existent user, asserting a 401 Unauthorized status."
+            "dependencies": [],
+            "parentTaskId": 12
           },
           {
             "id": 6,
-            "title": "Create Authentication Middleware for Protected Routes",
-            "description": "Implement middleware to protect specific API routes, ensuring they are only accessible by authenticated users.",
-            "dependencies": [],
-            "details": "The middleware will extract the JWT from the 'Authorization: Bearer <token>' header. It will use the JWT validation service from subtask 4 to verify the token. If valid, it attaches the user's ID to the request object and passes control to the next handler. If invalid, it returns a 401 Unauthorized error.",
+            "title": "마이그레이션 실행",
+            "description": "마이그레이션을 적용하여 데이터베이스 스키마를 업데이트합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Create a dummy protected endpoint (e.g., GET /api/profile). Write integration tests to access it with a valid token (should succeed), without a token (should fail with 401), and with an invalid/expired token (should fail with 401)."
+            "dependencies": [],
+            "parentTaskId": 12
           }
         ]
       },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:42:57.425Z",
+      "updated": "2025-08-08T15:46:07.661Z",
       "description": "Tasks for master context"
     }
   }
