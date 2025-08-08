@@ -84,7 +84,7 @@
             "title": "시스템 트레이 아이콘 구현",
             "description": "시스템 트레이에 아이콘을 표시하고 기본 이미지를 설정합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 2
           },
@@ -858,7 +858,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:49:30.246Z",
+      "updated": "2025-08-08T14:50:31.315Z",
       "description": "Tasks for master context"
     }
   }
