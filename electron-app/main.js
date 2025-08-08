@@ -43,7 +43,10 @@ app.whenReady().then(() => {
 
   clipboardEmitter.on('url-detected', (url) => {
     console.log('URL detected in main.js:', url);
-    showNotification('URL 감지됨', `클립보드에서 URL이 감지되었습니다: ${url}`); // 알림 표시
+    showNotification('URL 감지됨', `클립보드에서 URL이 감지되었습니다: ${url}`, () => {
+      console.log('Notification clicked for URL:', url);
+      // 여기에 알림 클릭 시 수행할 동작 추가 (예: URL 열기, 요약 창 띄우기)
+    });
   });
 
   app.on('activate', () => {
