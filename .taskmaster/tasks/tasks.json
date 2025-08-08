@@ -209,7 +209,7 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -263,57 +263,48 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema",
-            "description": "Create the necessary database table(s) to store user information, including username, hashed password, email, and timestamps.",
+            "title": "스크래퍼 모듈 생성",
+            "description": "`backend/services/scraper.py` 파일을 생성하여 웹 페이지에서 주요 텍스트 콘텐츠를 추출하는 로직을 구현합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Use a migration tool to create a 'users' table. The table should include columns: 'id' (primary key), 'username' (unique, indexed), 'email' (unique, indexed), 'hashed_password' (string), 'created_at', and 'updated_at'.",
-            "status": "pending",
-            "testStrategy": "Verify the table and its columns are created correctly in the development database. Run the migration up and down to ensure it's reversible. Check constraints like 'unique' and 'not null'."
+            "parentTaskId": 6
           },
           {
             "id": 2,
-            "title": "Create User Registration API Endpoint",
-            "description": "Develop a public API endpoint (e.g., POST /api/users/register) that allows new users to create an account.",
-            "dependencies": [],
-            "details": "The endpoint should accept a username, email, and password. It must validate the input, hash the password using a strong algorithm like bcrypt, and store the new user record in the database. Return a success message or the created user object (without the password).",
+            "title": "requests 및 BeautifulSoup4 설치",
+            "description": "웹 요청 및 HTML 파싱을 위한 라이브러리(`requests`, `BeautifulSoup4`)를 설치합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests to simulate API calls with valid data (expect 201 Created), duplicate data (expect 409 Conflict), and invalid data (expect 400 Bad Request)."
+            "dependencies": [],
+            "parentTaskId": 6
           },
           {
             "id": 3,
-            "title": "Create User Login API Endpoint and Issue JWT",
-            "description": "Develop an API endpoint (e.g., POST /api/auth/login) for users to log in and receive an authentication token.",
-            "dependencies": [],
-            "details": "The endpoint should accept a username/email and a password. It will find the user in the database and compare the provided password with the stored hash. If credentials are valid, generate a JSON Web Token (JWT) containing the user ID and an expiration date. Return the JWT to the client.",
+            "title": "URL 콘텐츠 가져오기",
+            "description": "주어진 URL에서 HTML 콘텐츠를 가져오는 함수를 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for successful login (expect 200 OK with a JWT), login with an incorrect password (expect 401 Unauthorized), and login with a non-existent user (expect 401 Unauthorized)."
+            "dependencies": [],
+            "parentTaskId": 6
           },
           {
             "id": 4,
-            "title": "Implement Middleware for Token Verification",
-            "description": "Create a middleware function that intercepts requests to protected routes, validates the JWT from the Authorization header, and attaches the user's identity to the request context.",
-            "dependencies": [],
-            "details": "The middleware should extract the 'Bearer' token from the 'Authorization' header. It will verify the token's signature and check for expiration. If valid, decode the payload to get the user ID and attach it to the request object. If invalid, it should return a 401 Unauthorized error.",
+            "title": "주요 텍스트 추출",
+            "description": "HTML에서 기사 본문과 같은 주요 텍스트 콘텐츠를 식별하고 추출하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Unit test the middleware logic with a valid token, an expired token, an invalid token, and no token. Test its integration with a sample protected route."
+            "dependencies": [],
+            "parentTaskId": 6
           },
           {
             "id": 5,
-            "title": "Create a Sample Protected API Endpoint",
-            "description": "Implement an example API endpoint (e.g., GET /api/users/me) that is protected by the authentication middleware and returns the current user's profile information.",
-            "dependencies": [],
-            "details": "This endpoint will be protected by the authentication middleware. It should retrieve the user ID from the request context, query the database for that user's details (excluding the password), and return them as a JSON response.",
+            "title": "오류 처리 및 타임아웃",
+            "description": "요청 실패 또는 파싱 오류에 대한 적절한 오류 처리와 타임아웃을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests. Call the endpoint with a valid JWT in the header and expect a 200 OK with user data. Call the endpoint with an invalid or missing JWT and expect a 401 Unauthorized error."
-          },
-          {
-            "id": 6,
-            "title": "Implement User Logout Functionality",
-            "description": "Create an API endpoint (e.g., POST /api/auth/logout) to handle user logout. This will involve managing a server-side token blocklist.",
             "dependencies": [],
-            "details": "Implement a token blocklist (e.g., using Redis or a database table). When a user logs out, add the token's unique identifier (jti claim) to this list. The authentication middleware must be updated to check this blocklist before validating a token.",
-            "status": "pending",
-            "testStrategy": "Test that after calling logout with a token, subsequent requests to a protected route with the same token are rejected with a 401 Unauthorized status. Verify the token ID is added to the blocklist."
+            "parentTaskId": 6
           }
         ]
       },
@@ -849,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:03:10.752Z",
+      "updated": "2025-08-08T15:04:57.562Z",
       "description": "Tasks for master context"
     }
   }
