@@ -59,7 +59,7 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -122,48 +122,39 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema",
-            "description": "Create the necessary database table(s) to store user information, including username, a hashed password, email, and timestamps.",
+            "title": "클립보드 모니터링 모듈 생성",
+            "description": "Electron의 `clipboard` API를 사용하여 클립보드 변경을 감지하는 모듈을 생성합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Use a migration tool (e.g., Alembic, Flyway) to create a 'users' table. The table should include columns: `id` (primary key), `username` (unique, indexed), `email` (unique, indexed), `hashed_password` (string), `created_at` (timestamp), `updated_at` (timestamp). Ensure password hashing is planned for, but not implemented here.",
-            "status": "pending",
-            "testStrategy": "Verify the migration runs successfully. Connect to the database and inspect the 'users' table schema to confirm all columns, types, and constraints are correct. Write a unit test to ensure the User model can be instantiated."
+            "parentTaskId": 3
           },
           {
             "id": 2,
-            "title": "Create User Registration Endpoint",
-            "description": "Develop a public API endpoint (e.g., POST /api/users/register) that allows new users to create an account.",
-            "dependencies": [],
-            "details": "The endpoint should accept a username, email, and password. It must validate the input (e.g., password complexity, valid email format), check for existing username/email, hash the password using a strong algorithm like bcrypt, and save the new user to the database. Return a success message or user object (without the password).",
+            "title": "URL 유효성 검사 로직 구현",
+            "description": "클립보드에서 읽어온 텍스트가 유효한 웹 URL인지 확인하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests. Test cases: successful registration, registration with a duplicate username, registration with a duplicate email, registration with an invalid email, registration with a weak password. Verify the password stored in the database is properly hashed."
+            "dependencies": [],
+            "parentTaskId": 3
           },
           {
             "id": 3,
-            "title": "Create User Login Endpoint and JWT Generation",
-            "description": "Develop an API endpoint (e.g., POST /api/auth/login) for users to authenticate and receive a JSON Web Token (JWT).",
-            "dependencies": [],
-            "details": "The endpoint should accept a username/email and a password. It will find the user in the database, compare the provided password with the stored hash. If credentials are valid, generate a signed JWT containing user identifiers (e.g., user ID) and an expiration time. The JWT secret key should be stored securely as an environment variable.",
+            "title": "URL 감지 시 이벤트 발생 및 로깅",
+            "description": "유효한 URL이 감지되면 특정 이벤트를 발생시키고, 감지된 URL을 로깅합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Integration tests. Test cases: successful login with correct credentials, failed login with incorrect password, failed login with non-existent user. Verify the returned JWT is correctly structured and can be decoded with the secret key."
+            "dependencies": [],
+            "parentTaskId": 3
           },
           {
             "id": 4,
-            "title": "Implement JWT Authentication Middleware",
-            "description": "Create middleware to protect specific API routes, requiring a valid JWT for access.",
-            "dependencies": [],
-            "details": "The middleware should extract the JWT from the 'Authorization' header (e.g., 'Bearer <token>'). It must then verify the token's signature and check its expiration. If valid, decode the payload and attach the user's information to the request object for use in subsequent handlers. If invalid, it should return a 401 Unauthorized error.",
+            "title": "클립보드 모니터링 백그라운드 실행 설정",
+            "description": "클립보드 모니터링이 Electron 앱의 메인 프로세스에서 백그라운드로 지속적으로 실행되도록 설정합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Unit test the middleware logic in isolation. Write integration tests for a protected endpoint. Test cases: access with a valid token, access with an expired token, access with a malformed/invalid token, access with no token. Verify that the user data is correctly attached to the request on success."
-          },
-          {
-            "id": 5,
-            "title": "Create Protected 'Get User Profile' Endpoint",
-            "description": "Create an example protected endpoint (e.g., GET /api/users/me) that uses the authentication middleware to return the current user's profile information.",
             "dependencies": [],
-            "details": "This endpoint will be protected by the JWT middleware created in the previous task. It should use the user information attached to the request by the middleware to fetch the corresponding user's details from the database. The returned data should not include sensitive information like the hashed password.",
-            "status": "pending",
-            "testStrategy": "Integration test. Attempt to access the endpoint with a valid JWT and verify the correct user profile data is returned. Ensure no sensitive data is exposed. Attempt to access without a JWT and confirm a 401 Unauthorized error is returned."
+            "parentTaskId": 3
           }
         ]
       },
@@ -858,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T14:52:00.783Z",
+      "updated": "2025-08-08T14:53:29.100Z",
       "description": "Tasks for master context"
     }
   }
