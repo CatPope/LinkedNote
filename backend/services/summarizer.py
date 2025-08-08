@@ -1,5 +1,5 @@
 import os
-from openai import OpenAI
+from openai import OpenAI, APIError, RateLimitError
 from dotenv import load_dotenv
 from .scraper import scrape_url
 
@@ -28,5 +28,12 @@ def summarize_text_with_openai(text: str, mode: str) -> str:
             ]
         )
         return response.choices[0].message.content
+    except APIError as e:
+        print(f"OpenAI API Error: {e.status_code} - {e.response}")
+        return f"Error from OpenAI API: {e.message}"
+    except RateLimitError as e:
+        print(f"OpenAI Rate Limit Error: {e.status_code} - {e.response}")
+        return "OpenAI API rate limit exceeded. Please try again later."
     except Exception as e:
-        return f"Error generating summary: {e}"
+        print(f"An unexpected error occurred: {e}")
+        return f"An unexpected error occurred: {e}"

@@ -361,7 +361,7 @@
             "title": "API 오류 처리",
             "description": "OpenAI API 호출 시 발생할 수 있는 오류(예: 잘못된 키, 속도 제한)를 처리합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 7
           }
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:28:55.418Z",
+      "updated": "2025-08-08T15:30:00.049Z",
       "description": "Tasks for master context"
     }
   }
