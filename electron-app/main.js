@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Tray, Menu } = require('electron')
 const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-monitor');
+const { showNotification } = require('./src/main/notification-manager');
 
 let tray = null
 
@@ -42,7 +43,7 @@ app.whenReady().then(() => {
 
   clipboardEmitter.on('url-detected', (url) => {
     console.log('URL detected in main.js:', url);
-    // 여기에 URL 처리 로직 추가 (예: 알림 표시, 요약 요청)
+    showNotification('URL 감지됨', `클립보드에서 URL이 감지되었습니다: ${url}`); // 알림 표시
   });
 
   app.on('activate', () => {
