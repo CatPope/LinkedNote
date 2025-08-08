@@ -562,7 +562,7 @@
             "title": "Alembic 마이그레이션 스크립트 생성",
             "description": "`summaries` 테이블 생성을 위한 Alembic 마이그레이션 스크립트를 생성합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 11
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:39:47.782Z",
+      "updated": "2025-08-08T15:41:39.036Z",
       "description": "Tasks for master context"
     }
   }
