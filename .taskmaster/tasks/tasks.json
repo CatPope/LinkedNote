@@ -334,7 +334,7 @@
             "title": "OpenAI API 키 설정",
             "description": "OpenAI API 키를 환경 변수에서 로드하도록 설정합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 7
           },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:10:53.815Z",
+      "updated": "2025-08-08T15:12:04.953Z",
       "description": "Tasks for master context"
     }
   }
