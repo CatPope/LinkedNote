@@ -259,7 +259,7 @@
         "dependencies": [
           5
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -322,48 +322,48 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema",
-            "description": "Create the database schema required for storing user information, including credentials and profile data.",
+            "title": "OpenAI 라이브러리 설치",
+            "description": "`openai` 파이썬 라이브러리를 설치합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Use a relational database like PostgreSQL. Create a 'users' table with columns: id (UUID, primary key), email (VARCHAR, unique, not null), password_hash (VARCHAR, not null), created_at (TIMESTAMP), updated_at (TIMESTAMP).",
-            "status": "pending",
-            "testStrategy": "Verify the table and columns are created correctly using a database inspection tool. Write a migration script and test its up and down states. Manually insert a record to ensure constraints are enforced."
+            "parentTaskId": 7
           },
           {
             "id": 2,
-            "title": "Implement User Registration Endpoint",
-            "description": "Create a public API endpoint (e.g., POST /api/auth/register) to allow new users to sign up for an account.",
-            "dependencies": [],
-            "details": "The endpoint should accept an email and password. Validate the input data (e.g., email format, password strength). Hash the password using a strong algorithm like bcrypt before storing it in the database. Return a success message and user ID upon successful registration.",
+            "title": "OpenAI API 키 설정",
+            "description": "OpenAI API 키를 환경 변수에서 로드하도록 설정합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write an integration test that sends a POST request with valid user data and asserts a 201 Created response. Test edge cases like duplicate emails (expect 409 Conflict) and invalid input (expect 400 Bad Request)."
+            "dependencies": [],
+            "parentTaskId": 7
           },
           {
             "id": 3,
-            "title": "Implement User Login Endpoint and JWT Generation",
-            "description": "Create a public API endpoint (e.g., POST /api/auth/login) for users to authenticate and receive an access token.",
-            "dependencies": [],
-            "details": "The endpoint should accept an email and password. Find the user by email, then compare the provided password with the stored hash. If valid, generate a JSON Web Token (JWT) containing the user ID and an expiration date. Return the JWT to the client.",
+            "title": "요약 로직 구현",
+            "description": "`backend/services/summarizer.py` 파일을 수정하여 OpenAI API를 사용하여 실제 요약을 생성하는 로직을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests that attempt to log in with correct credentials (assert 200 OK and a valid JWT), incorrect passwords (assert 401 Unauthorized), and non-existent emails (assert 401 Unauthorized)."
+            "dependencies": [],
+            "parentTaskId": 7
           },
           {
             "id": 4,
-            "title": "Create Authentication Middleware for Protected Routes",
-            "description": "Develop middleware to verify the JWT on incoming requests to secure specific API endpoints.",
-            "dependencies": [],
-            "details": "The middleware should extract the JWT from the 'Authorization: Bearer <token>' header. It must verify the token's signature and check for expiration. If valid, decode the payload and attach the user's identity to the request context. If invalid, it must return a 401 Unauthorized error.",
+            "title": "프롬프트 정의",
+            "description": "요약, 태그, 전체 텍스트 추출을 위한 프롬프트를 정의합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Create a protected test endpoint. Write unit tests for the middleware logic. Write integration tests that call the protected endpoint without a token, with an invalid/expired token (expect 401), and with a valid token (expect 200 OK)."
+            "dependencies": [],
+            "parentTaskId": 7
           },
           {
             "id": 5,
-            "title": "Implement Protected 'Get User Profile' Endpoint",
-            "description": "Create a protected endpoint (e.g., GET /api/users/me) that returns the profile information of the currently authenticated user.",
-            "dependencies": [],
-            "details": "Apply the authentication middleware to this route. The route handler should access the user identity from the request context (populated by the middleware) and retrieve the corresponding user's data from the database. Return a sanitized user object, omitting sensitive fields like the password hash.",
+            "title": "API 오류 처리",
+            "description": "OpenAI API 호출 시 발생할 수 있는 오류(예: 잘못된 키, 속도 제한)를 처리합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write an integration test that first logs in a user to get a JWT, then uses that JWT to make a request to the /api/users/me endpoint. Assert that the response is 200 OK and contains the correct user's data (e.g., email, id) but not the password hash."
+            "dependencies": [],
+            "parentTaskId": 7
           }
         ]
       },
@@ -840,7 +840,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:08:49.881Z",
+      "updated": "2025-08-08T15:10:53.815Z",
       "description": "Tasks for master context"
     }
   }
