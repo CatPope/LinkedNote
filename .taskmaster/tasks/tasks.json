@@ -691,7 +691,7 @@
           9,
           10
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -738,64 +738,55 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema",
-            "description": "Create the necessary database table to store user information, including credentials and profile data.",
+            "title": "Electron Builder 설치 및 설정",
+            "description": "`electron-builder`를 설치하고 `package.json`에 빌드 설정을 추가합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Create a 'users' table with columns: id (primary key, auto-increment), email (unique, indexed), password_hash (string), created_at (timestamp), and updated_at (timestamp). Use a database migration tool to version control the schema.",
-            "status": "pending",
-            "testStrategy": "Verify the table and its columns are created correctly in the development database. Write a unit test for the User model to ensure it can be instantiated and saved without errors."
+            "parentTaskId": 15
           },
           {
             "id": 2,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Implement the server-side endpoint that allows a new user to create an account.",
-            "dependencies": [],
-            "details": "Create a `POST /api/auth/register` endpoint. It must validate incoming data (email format, password strength). Use a strong hashing algorithm like bcrypt to hash the user's password before storing it in the database. Return a success status or user object (without the password hash) on successful creation.",
+            "title": "Windows 설치 프로그램 빌드",
+            "description": "Windows용 `.exe` 설치 프로그램을 빌드합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests to cover: successful registration, registration with a duplicate email, and registration with invalid input (e.g., weak password, invalid email format). Assert correct HTTP status codes and response bodies."
+            "dependencies": [],
+            "parentTaskId": 15
           },
           {
             "id": 3,
-            "title": "Develop User Login API Endpoint with JWT Generation",
-            "description": "Implement the server-side endpoint for user login, which returns a JSON Web Token (JWT) upon successful authentication.",
-            "dependencies": [],
-            "details": "Create a `POST /api/auth/login` endpoint. It should find the user by email, compare the provided password with the stored hash using bcrypt. If credentials are valid, generate a signed JWT containing the user ID and an expiration date. Return the JWT in the response body.",
+            "title": "macOS 설치 프로그램 빌드",
+            "description": "macOS용 `.dmg` 설치 프로그램을 빌드합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for: successful login with correct credentials, failed login with an incorrect password, and failed login for a non-existent user. Verify the structure and signature of the returned JWT."
+            "dependencies": [],
+            "parentTaskId": 15
           },
           {
             "id": 4,
-            "title": "Implement Authentication Middleware for Protected Routes",
-            "description": "Create a middleware function to verify the JWT on incoming requests to protected API routes.",
-            "dependencies": [],
-            "details": "The middleware should extract the JWT from the `Authorization: Bearer <token>` header. It must verify the token's signature and check for expiration. If the token is valid, decode the payload and attach the user's identity to the request object (e.g., `req.user`). If invalid, it must return a 401 Unauthorized error.",
+            "title": "Linux 설치 프로그램 빌드",
+            "description": "Linux용 `.deb` 또는 AppImage 설치 프로그램을 빌드합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write unit tests for the middleware logic, covering cases with a valid token, an invalid token, an expired token, and no token provided. Assert that the request is passed to the next handler or rejected appropriately."
+            "dependencies": [],
+            "parentTaskId": 15
           },
           {
             "id": 5,
-            "title": "Create a Sample Protected API Route",
-            "description": "Implement an example API route that is protected by the authentication middleware to test the end-to-end authentication flow.",
-            "dependencies": [],
-            "details": "Create a `GET /api/user/profile` endpoint. Apply the authentication middleware created in the previous task. The route handler should access the user information from the request object (e.g., `req.user.id`) and return non-sensitive profile data for that user.",
+            "title": "README 및 사용자 가이드 작성",
+            "description": "설치 및 사용법에 대한 간단한 README 파일과 사용자 가이드를 작성합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write an integration test that makes a request to the protected route with a valid JWT and asserts a 200 OK response with the correct user data. Write another test that makes a request without a JWT and asserts a 401 Unauthorized response."
-          },
-          {
-            "id": 6,
-            "title": "Build Frontend Login and Registration UI Components",
-            "description": "Create the user interface components for the login and registration forms that interact with the backend API.",
             "dependencies": [],
-            "details": "Using a frontend framework, create 'LoginForm' and 'RegisterForm' components. The forms should handle user input, perform client-side validation, and make API calls to the respective endpoints on submission. On successful login, the received JWT should be stored securely (e.g., in an HttpOnly cookie or local storage).",
-            "status": "pending",
-            "testStrategy": "Use an end-to-end testing tool like Cypress or Playwright. Create test scripts to simulate a user registering, logging in, and being denied access to a protected page before login, and granted access after login. Verify UI feedback for errors and success states."
+            "parentTaskId": 15
           }
         ]
       }
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:28:59.916Z",
+      "updated": "2025-08-09T08:36:10.600Z",
       "description": "Tasks for master context"
     }
   }
