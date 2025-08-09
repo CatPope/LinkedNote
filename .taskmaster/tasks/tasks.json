@@ -394,7 +394,7 @@
             "title": "결과 표시 창 HTML/CSS 생성",
             "description": "요약 결과를 표시하기 위한 600x400px 창의 HTML/CSS를 생성합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 8
           },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T07:47:12.368Z",
+      "updated": "2025-08-09T07:49:35.208Z",
       "description": "Tasks for master context"
     }
   }
