@@ -759,7 +759,7 @@
             "title": "macOS 설치 프로그램 빌드",
             "description": "macOS용 `.dmg` 설치 프로그램을 빌드합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 15
           },
@@ -786,7 +786,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:40:18.660Z",
+      "updated": "2025-08-09T08:42:31.247Z",
       "description": "Tasks for master context"
     }
   }
