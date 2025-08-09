@@ -768,7 +768,7 @@
             "title": "Linux 설치 프로그램 빌드",
             "description": "Linux용 `.deb` 또는 AppImage 설치 프로그램을 빌드합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 15
           },
@@ -786,7 +786,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:42:31.247Z",
+      "updated": "2025-08-09T08:44:51.772Z",
       "description": "Tasks for master context"
     }
   }
