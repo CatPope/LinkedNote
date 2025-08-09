@@ -1,4 +1,5 @@
-const { clipboard, EventEmitter } = require('electron');
+const { clipboard } = require('electron');
+const EventEmitter = require('events');
 
 let lastClipboardText = '';
 const clipboardEmitter = new EventEmitter();
