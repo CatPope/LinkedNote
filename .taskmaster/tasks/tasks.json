@@ -716,7 +716,7 @@
             "title": "UI 반응성 최적화",
             "description": "UI 반응성을 100ms 미만으로 최적화합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 14
           }
@@ -795,7 +795,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:26:51.274Z",
+      "updated": "2025-08-09T08:28:59.916Z",
       "description": "Tasks for master context"
     }
   }
