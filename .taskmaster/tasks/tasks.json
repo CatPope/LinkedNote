@@ -750,7 +750,7 @@
             "title": "Windows 설치 프로그램 빌드",
             "description": "Windows용 `.exe` 설치 프로그램을 빌드합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 15
           },
@@ -786,7 +786,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:36:10.600Z",
+      "updated": "2025-08-09T08:40:18.660Z",
       "description": "Tasks for master context"
     }
   }
