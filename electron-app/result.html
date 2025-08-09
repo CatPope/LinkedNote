@@ -11,7 +11,15 @@
       <p id="summaryContent"></p>
     </div>
     <script>
-      // 여기에 JavaScript 로직 추가
+      const { ipcRenderer } = require('electron');
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const summaryContentElement = document.getElementById('summaryContent');
+
+        ipcRenderer.on('summary-content', (event, summaryContent) => {
+          summaryContentElement.textContent = summaryContent;
+        });
+      });
     </script>
   </body>
 </html>

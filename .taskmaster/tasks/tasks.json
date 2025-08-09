@@ -421,7 +421,7 @@
             "title": "팝업과 결과 창 간의 통신 구현",
             "description": "모드 선택 팝업에서 선택된 모드와 URL을 결과 창으로 전달하는 IPC 통신을 구현합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 8
           },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T07:54:00.250Z",
+      "updated": "2025-08-09T07:56:52.433Z",
       "description": "Tasks for master context"
     }
   }

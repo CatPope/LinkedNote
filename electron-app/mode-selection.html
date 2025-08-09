@@ -14,7 +14,31 @@
       <button id="fullText">Full Text</button>
     </div>
     <script>
-      // 여기에 JavaScript 로직 추가
+      const { ipcRenderer } = require('electron');
+
+      let currentUrl = '';
+
+      ipcRenderer.on('url-to-summarize', (event, url) => {
+        currentUrl = url;
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('quickSummary').addEventListener('click', () => {
+          ipcRenderer.send('request-summary', { url: currentUrl, mode: 'quick' });
+        });
+
+        document.getElementById('detailedSummary').addEventListener('click', () => {
+          ipcRenderer.send('request-summary', { url: currentUrl, mode: 'detailed' });
+        });
+
+        document.getElementById('tagsExtraction').addEventListener('click', () => {
+          ipcRenderer.send('request-summary', { url: currentUrl, mode: 'tags' });
+        });
+
+        document.getElementById('fullText').addEventListener('click', () => {
+          ipcRenderer.send('request-summary', { url: currentUrl, mode: 'full' });
+        });
+      });
     </script>
   </body>
 </html>

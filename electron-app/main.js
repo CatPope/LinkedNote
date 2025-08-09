@@ -2,6 +2,7 @@ const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron')
 const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-monitor');
 const { showNotification } = require('./src/main/notification-manager');
 const { readConfig, writeConfig } = require('./src/main/config-manager');
+const axios = require('axios');
 
 let tray = null
 let mainWindow = null
@@ -162,11 +163,20 @@ app.whenReady().then(() => {
   // 모드 선택 팝업에서 요약 요청 수신
   ipcMain.on('request-summary', async (event, { url, mode }) => {
     console.log(`Summarizing URL: ${url} with mode: ${mode}`);
-    // 여기에 FastAPI 백엔드 호출 로직 추가
-    // 현재는 모의 요약 사용
-    const mockSummary = `Summary for ${url} in ${mode} mode.`;
-    createResultWindow(mockSummary);
-    modeSelectionWindow.close();
+    if (modeSelectionWindow) {
+      modeSelectionWindow.close();
+    }
+
+    try {
+      const response = await axios.post('http://localhost:8000/api/summarize', {
+        url: url,
+        mode: mode
+      });
+      createResultWindow(response.data.summary);
+    } catch (error) {
+      console.error('Error summarizing URL:', error.message);
+      createResultWindow(`Error: ${error.message}`);
+    }
   });
 
   app.on('window-all-closed', () => {
