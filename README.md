@@ -26,6 +26,7 @@ LinkedNote는 클립보드에서 웹 URL을 자동으로 감지하고, 해당 UR
     ```bash
     cd backend
     pip install -r requirements.txt
+    cd ./..
     python -m alembic upgrade head
     ```
 
