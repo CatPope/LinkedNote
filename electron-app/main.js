@@ -6,6 +6,7 @@ const { readConfig, writeConfig } = require('./src/main/config-manager');
 let tray = null
 let mainWindow = null
 let settingsWindow = null
+let modeSelectionWindow = null;
 let openaiApiKey = null;
 
 function createWindow () {
@@ -50,6 +51,37 @@ function createSettingsWindow() {
   })
 }
 
+function createModeSelectionWindow(url) {
+  if (modeSelectionWindow) {
+    modeSelectionWindow.focus();
+    return;
+  }
+
+  modeSelectionWindow = new BrowserWindow({
+    width: 300,
+    height: 200,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    },
+    parent: mainWindow,
+    modal: true,
+    show: false,
+    frame: false,
+    transparent: true
+  })
+
+  modeSelectionWindow.loadFile('mode-selection.html')
+  modeSelectionWindow.once('ready-to-show', () => {
+    modeSelectionWindow.show()
+    modeSelectionWindow.webContents.send('url-to-summarize', url);
+  })
+
+  modeSelectionWindow.on('closed', () => {
+    modeSelectionWindow = null
+  })
+}
+
 app.whenReady().then(() => {
   createWindow()
 
@@ -81,7 +113,7 @@ app.whenReady().then(() => {
     console.log('URL detected in main.js:', url);
     showNotification('URL 감지됨', `클립보드에서 URL이 감지되었습니다: ${url}`, () => {
       console.log('Notification clicked for URL:', url);
-      // 여기에 알림 클릭 시 수행할 동작 추가 (예: URL 열기, 요약 창 띄우기)
+      createModeSelectionWindow(url);
     });
   });
 
