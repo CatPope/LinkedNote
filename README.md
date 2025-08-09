@@ -46,7 +46,7 @@ LinkedNote는 클립보드에서 웹 URL을 자동으로 감지하고, 해당 UR
 ---
 4.  **백엔드 서버 실행**: 
     ```bash
-    uvicorn main:app --reload --port 8000
+    uvicorn backend.main:app --reload --port 8000
     ```
 
 5.  **프론트엔드 설정 (Electron)**:
