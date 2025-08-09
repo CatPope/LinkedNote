@@ -182,7 +182,15 @@ app.whenReady().then(() => {
       createResultWindow(response.data.summary);
     } catch (error) {
       console.error('Error summarizing URL:', error.message);
-      createResultWindow(`Error: ${error.message}`);
+      let errorMessage = '요약 중 오류가 발생했습니다.';
+      if (error.response) {
+        errorMessage = `오류: ${error.response.data.detail || error.message}`;
+      } else if (error.request) {
+        errorMessage = '네트워크 오류: 백엔드 서버에 연결할 수 없습니다.';
+      } else {
+        errorMessage = `알 수 없는 오류: ${error.message}`;
+      }
+      createResultWindow(errorMessage);
     }
   });
 
