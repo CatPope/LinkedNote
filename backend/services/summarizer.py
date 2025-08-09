@@ -2,12 +2,14 @@ import os
 from openai import OpenAI, APIError, RateLimitError
 from dotenv import load_dotenv
 from .scraper import scrape_url
+from backend.models import Summary
+from sqlalchemy.orm import Session
 
 load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def summarize_text_with_openai(text: str, mode: str) -> str:
+def summarize_text_with_openai(db: Session, url: str, text: str, mode: str) -> str:
     if mode == "quick":
         prompt = f"Summarize the following text concisely: {text}"
     elif mode == "detailed":
@@ -27,7 +29,14 @@ def summarize_text_with_openai(text: str, mode: str) -> str:
                 {"role": "user", "content": prompt}
             ]
         )
-        return response.choices[0].message.content
+        summary_content = response.choices[0].message.content
+
+        db_summary = Summary(url=url, mode=mode, content=summary_content)
+        db.add(db_summary)
+        db.commit()
+        db.refresh(db_summary)
+
+        return summary_content
     except APIError as e:
         print(f"OpenAI API Error: {e.status_code} - {e.response}")
         return f"Error from OpenAI API: {e.message}"
