@@ -777,7 +777,7 @@
             "title": "README 및 사용자 가이드 작성",
             "description": "설치 및 사용법에 대한 간단한 README 파일과 사용자 가이드를 작성합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 15
           }
@@ -786,7 +786,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:44:51.772Z",
+      "updated": "2025-08-09T08:47:43.720Z",
       "description": "Tasks for master context"
     }
   }
