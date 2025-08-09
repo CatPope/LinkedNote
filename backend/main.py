@@ -4,11 +4,13 @@ from .api.dependencies import get_current_user
 from .models import User
 from .schemas import user as user_schemas
 from .api import summarize
+from .api import history
 
 app = FastAPI()
 
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(summarize.router, prefix="/api", tags=["summarize"])
+app.include_router(history.router, prefix="/api", tags=["history"])
 
 @app.get("/")
 async def read_root():

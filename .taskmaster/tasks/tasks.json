@@ -673,7 +673,7 @@
             "title": "main.py에 기록 라우터 포함",
             "description": "`main.py`에서 새로 생성된 기록 라우터를 포함합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 13
           }
@@ -831,7 +831,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:16:01.860Z",
+      "updated": "2025-08-09T08:18:23.281Z",
       "description": "Tasks for master context"
     }
   }
