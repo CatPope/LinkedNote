@@ -474,6 +474,24 @@
             "details": "Endpoint: POST /api/auth/login. Request body should include email and password. Find the user by email, then use bcrypt.compare to verify the password against the stored hash. If valid, generate a JWT containing the user ID and role, signed with a secret key. The token should have a defined expiration time.",
             "status": "pending",
             "testStrategy": "Write integration tests for the login endpoint. Test successful login with valid credentials, failed login with an incorrect password, and failed login for a non-existent user. Verify the structure and signature of the returned JWT. Ensure a 401 Unauthorized status is returned for failed attempts."
+          },
+          {
+            "id": 3,
+            "title": "Develop User Registration API Endpoint",
+            "description": "Create the backend endpoint to handle new user registration, including input validation, password hashing, and database record creation.",
+            "dependencies": [],
+            "details": "Implement a POST /api/auth/register endpoint. It should accept 'email', 'password', and 'username'. Validate that the email is unique and the password meets security standards (e.g., min 8 characters). Use bcrypt to hash the password before saving the new user to the database. On success, return a 201 Created status and the new user object (without the password hash).",
+            "status": "pending",
+            "testStrategy": "Write unit tests to verify input validation logic (invalid email, weak password). Write integration tests to simulate API calls: test successful registration, registration with a duplicate email, and registration with missing fields. Verify the password stored in the database is correctly hashed."
+          },
+          {
+            "id": 4,
+            "title": "Develop User Login API Endpoint",
+            "description": "Create the backend endpoint to authenticate users with their credentials and issue a JSON Web Token (JWT) upon successful login.",
+            "dependencies": [],
+            "details": "Implement a POST /api/auth/login endpoint. It should accept 'email' and 'password'. Find the user by email, then use bcrypt to compare the provided password with the stored hash. If they match, generate a signed JWT containing the user ID and role. Return the JWT in the response body. If authentication fails, return a 401 Unauthorized status.",
+            "status": "pending",
+            "testStrategy": "Write integration tests to simulate API calls: test successful login with valid credentials, failed login with an incorrect password, and failed login for a non-existent user. Verify that a valid JWT is returned on success and that the token can be decoded with the correct secret key."
           }
         ]
       },
@@ -640,7 +658,7 @@
             "title": "마이그레이션 실행",
             "description": "마이그레이션을 적용하여 데이터베이스 스키마를 업데이트합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 12
           }
@@ -840,7 +858,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-08T15:51:46.042Z",
+      "updated": "2025-08-09T07:43:08.645Z",
       "description": "Tasks for master context"
     }
   }
