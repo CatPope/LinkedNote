@@ -648,7 +648,7 @@
           11,
           7
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -695,66 +695,30 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Database Schema",
-            "description": "Create the necessary database tables to store user credentials and profile information securely.",
+            "title": "전반적인 스타일 개선",
+            "description": "Electron 애플리케이션의 전반적인 UI 스타일을 개선하여 더 현대적이고 일관된 디자인을 적용합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Create a 'users' table with columns: id (primary key, UUID), email (unique, not null), password_hash (not null), created_at, and updated_at. Use a database migration tool (e.g., Alembic, Flyway, Knex.js) to script and apply the schema changes.",
-            "status": "pending",
-            "testStrategy": "Verify the migration runs successfully against a test database. Manually inspect the created table schema to ensure all columns, types, and constraints are correct. Write a test to ensure email uniqueness is enforced at the database level."
+            "parentTaskId": 14
           },
           {
             "id": 2,
-            "title": "Implement Secure Password Hashing Service",
-            "description": "Create a reusable service for hashing and verifying passwords using a strong, salted hashing algorithm like bcrypt.",
-            "dependencies": [],
-            "details": "Create a module with two primary functions: `hashPassword(plainTextPassword)` which returns a promise resolving to a hash, and `comparePassword(plainTextPassword, hash)` which returns a promise resolving to a boolean. Use the bcrypt library with a reasonable cost factor (e.g., 12).",
+            "title": "로딩 상태 및 오류 메시지 개선",
+            "description": "모든 작업(네트워크 실패, 잘못된 API 키, 스크래핑 실패 등)에 대해 명확한 로딩 상태와 사용자 친화적인 오류 메시지를 추가합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write unit tests for the service. Test that `hashPassword` produces a valid hash string. Test that `comparePassword` returns true for the correct password and false for an incorrect one. Ensure it handles non-string inputs gracefully."
+            "dependencies": [],
+            "parentTaskId": 14
           },
           {
             "id": 3,
-            "title": "Implement JWT Generation and Validation Service",
-            "description": "Create a service to generate JSON Web Tokens (JWTs) on successful login and to validate them for authenticating subsequent requests.",
-            "dependencies": [],
-            "details": "Use a standard JWT library (e.g., `jsonwebtoken` for Node.js). Create a `generateToken(payload)` function that signs a token with a secret key from environment variables. The payload should include user ID and an expiration time (e.g., '1h'). Create a `verifyToken(token)` function that decodes and validates the token.",
+            "title": "UI 반응성 최적화",
+            "description": "UI 반응성을 100ms 미만으로 최적화합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Unit test the service. Ensure `generateToken` creates a correctly structured token. Ensure `verifyToken` successfully validates a good token and throws appropriate errors for expired, malformed, or invalid-signature tokens."
-          },
-          {
-            "id": 4,
-            "title": "Create User Registration API Endpoint",
-            "description": "Develop a public API endpoint for new users to create an account.",
             "dependencies": [],
-            "details": "Implement a `POST /api/auth/register` endpoint. It should accept email and password. Validate input (e.g., password strength, valid email format). Use the Password Hashing Service to hash the password before storing the new user record in the database. Return a 201 Created status with the new user's ID and email.",
-            "status": "pending",
-            "testStrategy": "Write integration tests to check for successful registration with valid data. Test for correct error handling with duplicate emails (409 Conflict), invalid email formats (400 Bad Request), and weak passwords (400 Bad Request). Verify the user is correctly inserted into the test database with a properly hashed password."
-          },
-          {
-            "id": 5,
-            "title": "Create User Login API Endpoint",
-            "description": "Develop an API endpoint for users to authenticate and receive an access token.",
-            "dependencies": [],
-            "details": "Implement a `POST /api/auth/login` endpoint. It should accept email and password. Find the user in the database by email. Use the Password Hashing Service to compare the provided password with the stored hash. If valid, use the JWT Service to generate a token and return it in the response body.",
-            "status": "pending",
-            "testStrategy": "Write integration tests for successful login with correct credentials, verifying a valid JWT is returned. Test failed login attempts with incorrect passwords and non-existent users, ensuring a generic 401 Unauthorized error is returned to prevent user enumeration."
-          },
-          {
-            "id": 6,
-            "title": "Implement Authentication Middleware for Protected Routes",
-            "description": "Create middleware to protect specific API routes, ensuring only authenticated users can access them.",
-            "dependencies": [],
-            "details": "The middleware should extract the JWT from the `Authorization: Bearer <token>` header. Use the JWT Service to verify the token. If valid, attach the decoded payload (containing user ID) to the request object (e.g., `req.user`) and pass control to the next handler. If invalid or missing, return a 401 Unauthorized error.",
-            "status": "pending",
-            "testStrategy": "Create a dummy protected endpoint (e.g., `GET /api/profile`). Write integration tests to verify that requests with a valid token are allowed (200 OK), while requests with no token, an invalid token, or an expired token are rejected with a 401 Unauthorized status code."
-          },
-          {
-            "id": 7,
-            "title": "Integrate Authentication with Frontend Forms",
-            "description": "Build the UI components for login and registration and connect them to the backend API endpoints.",
-            "dependencies": [],
-            "details": "Create Login and Register page components with forms. On form submission, make API calls to the `/api/auth/login` or `/api/auth/register` endpoints. On successful login, store the received JWT securely (e.g., in an HttpOnly cookie) and redirect the user to a protected dashboard page. Display appropriate error messages from the API on failure.",
-            "status": "pending",
-            "testStrategy": "Use an end-to-end testing framework like Cypress or Playwright. Test the full user flow: registering a new user, logging in with those credentials, storing the token, and successfully accessing a protected route. Test that UI error messages are displayed for failed login/registration attempts."
+            "parentTaskId": 14
           }
         ]
       },
@@ -831,7 +795,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T08:18:23.281Z",
+      "updated": "2025-08-09T08:24:08.713Z",
       "description": "Tasks for master context"
     }
   }
