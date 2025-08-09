@@ -382,66 +382,57 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Design and Implement User Authentication Database Schema",
-            "description": "Create the necessary database tables to store user information, including credentials, roles, and personal details.",
+            "title": "모드 선택 팝업 HTML/CSS 생성",
+            "description": "모드 선택(예: \"빠른 요약\", \"자세한 요약\")을 위한 300x200px 팝업 창의 HTML/CSS를 생성합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Define a 'users' table with columns for id, username, email, hashed_password, created_at, and updated_at. Use a database migration tool to version the schema. Consider adding tables for 'roles' and 'user_roles' for future role-based access control.",
-            "status": "pending",
-            "testStrategy": "Run the migration script against a test database. Manually inspect the created tables and columns to ensure they match the design specifications. Verify constraints like 'unique' on the email column."
+            "parentTaskId": 8
           },
           {
             "id": 2,
-            "title": "Implement Secure Password Hashing Service",
-            "description": "Create a reusable module/service for securely hashing and verifying user passwords to prevent plain-text storage.",
-            "dependencies": [],
-            "details": "Use a strong, adaptive hashing algorithm like bcrypt or Argon2. The service should expose two main functions: one to hash a plain-text password and another to compare a plain-text password against an existing hash.",
+            "title": "결과 표시 창 HTML/CSS 생성",
+            "description": "요약 결과를 표시하기 위한 600x400px 창의 HTML/CSS를 생성합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write unit tests to confirm that the hashing function produces a valid hash and the verification function correctly identifies both matching and non-matching passwords. Ensure two hashes of the same password are not identical due to salting."
+            "dependencies": [],
+            "parentTaskId": 8
           },
           {
             "id": 3,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create the backend API endpoint (e.g., POST /api/auth/register) that allows new users to create an account.",
-            "dependencies": [],
-            "details": "The endpoint should accept user details (e.g., username, email, password). It must validate the input, check for existing users with the same email/username, use the password hashing service to hash the password, and save the new user record to the database.",
+            "title": "모드 선택 팝업 로드 및 표시",
+            "description": "Electron의 `BrowserWindow`를 사용하여 모드 선택 팝업을 로드하고 표시합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Use an API testing tool like Postman to test successful registration, registration with a duplicate email, and registration with invalid data (e.g., weak password, invalid email format). Verify the database record shows a hashed password."
+            "dependencies": [],
+            "parentTaskId": 8
           },
           {
             "id": 4,
-            "title": "Develop User Login API Endpoint and JWT Generation",
-            "description": "Create the backend API endpoint (e.g., POST /api/auth/login) for users to sign in and receive an authentication token.",
-            "dependencies": [],
-            "details": "The endpoint will accept user credentials, find the user in the database, use the password hashing service to verify the password, and if successful, generate a JSON Web Token (JWT) containing user identifiers (e.g., user ID, role). The JWT is returned to the client.",
+            "title": "결과 표시 창 로드 및 표시",
+            "description": "Electron의 `BrowserWindow`를 사용하여 결과 표시 창을 로드하고 표시합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for successful login with correct credentials, failed login with an incorrect password, and failed login for a non-existent user. Verify the structure and payload of the returned JWT."
+            "dependencies": [],
+            "parentTaskId": 8
           },
           {
             "id": 5,
-            "title": "Implement API Middleware for Route Protection",
-            "description": "Create backend middleware to protect specific API routes, ensuring they are only accessible by authenticated users.",
-            "dependencies": [],
-            "details": "The middleware will extract the JWT from the 'Authorization' header. It will verify the token's signature and expiration. If valid, it will attach the user's information to the request object and pass control to the next handler. If invalid, it will return a 401 Unauthorized error.",
+            "title": "팝업과 결과 창 간의 통신 구현",
+            "description": "모드 선택 팝업에서 선택된 모드와 URL을 결과 창으로 전달하는 IPC 통신을 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Create a test-protected endpoint. Write integration tests to access it with a valid token (should succeed), without a token (should fail), and with an invalid or expired token (should fail)."
+            "dependencies": [],
+            "parentTaskId": 8
           },
           {
             "id": 6,
-            "title": "Create Frontend Registration Form Component",
-            "description": "Build the UI component for the user registration page, including input fields, validation, and form submission logic.",
-            "dependencies": [],
-            "details": "The form should have fields for username, email, password, and password confirmation. Implement client-side validation for input formats and password strength. On submission, it should call the registration API and handle success or error responses.",
+            "title": "로딩 인디케이터 구현",
+            "description": "요약 요청 중 로딩 인디케이터를 표시하는 UI를 구현합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Manual end-to-end testing: fill out and submit the form, checking for correct API calls in the browser's network tab. Write component tests to verify form validation logic and state management. Test UI responsiveness."
-          },
-          {
-            "id": 7,
-            "title": "Create Frontend Login Form and Token Management",
-            "description": "Build the UI for the login page and implement client-side logic to handle the authentication token.",
             "dependencies": [],
-            "details": "The form should have fields for email and password. On successful login, the received JWT must be securely stored on the client (e.g., in an HttpOnly cookie or local storage). Subsequent API requests to protected routes must include this token.",
-            "status": "pending",
-            "testStrategy": "End-to-end testing: log in successfully and verify the token is stored. Navigate to a protected page to ensure access is granted. Log out and verify the token is cleared and access to the protected page is denied."
+            "parentTaskId": 8
           }
         ]
       },
@@ -606,7 +597,7 @@
           10,
           11
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -858,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T07:43:08.645Z",
+      "updated": "2025-08-09T07:47:12.368Z",
       "description": "Tasks for master context"
     }
   }
