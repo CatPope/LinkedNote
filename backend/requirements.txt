@@ -4,8 +4,10 @@ sqlalchemy
 alembic
 passlib[bcrypt]
 python-jose[cryptography]
+pydantic[email]
 python-dotenv
 requests
 beautifulsoup4
 openai
 cryptography
+python-multipart
