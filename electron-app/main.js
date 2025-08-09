@@ -7,6 +7,7 @@ let tray = null
 let mainWindow = null
 let settingsWindow = null
 let modeSelectionWindow = null;
+let resultWindow = null;
 let openaiApiKey = null;
 
 function createWindow () {
@@ -82,6 +83,35 @@ function createModeSelectionWindow(url) {
   })
 }
 
+function createResultWindow(summaryContent) {
+  if (resultWindow) {
+    resultWindow.focus();
+    return;
+  }
+
+  resultWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    },
+    parent: mainWindow,
+    modal: true,
+    show: false
+  })
+
+  resultWindow.loadFile('result.html')
+  resultWindow.once('ready-to-show', () => {
+    resultWindow.show()
+    resultWindow.webContents.send('summary-content', summaryContent);
+  })
+
+  resultWindow.on('closed', () => {
+    resultWindow = null
+  })
+}
+
 app.whenReady().then(() => {
   createWindow()
 
@@ -127,6 +157,16 @@ app.whenReady().then(() => {
     config.openaiApiKey = apiKey;
     writeConfig(config);
     openaiApiKey = apiKey;
+  });
+
+  // 모드 선택 팝업에서 요약 요청 수신
+  ipcMain.on('request-summary', async (event, { url, mode }) => {
+    console.log(`Summarizing URL: ${url} with mode: ${mode}`);
+    // 여기에 FastAPI 백엔드 호출 로직 추가
+    // 현재는 모의 요약 사용
+    const mockSummary = `Summary for ${url} in ${mode} mode.`;
+    createResultWindow(mockSummary);
+    modeSelectionWindow.close();
   });
 
   app.on('window-all-closed', () => {

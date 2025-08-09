@@ -412,7 +412,7 @@
             "title": "결과 표시 창 로드 및 표시",
             "description": "Electron의 `BrowserWindow`를 사용하여 결과 표시 창을 로드하고 표시합니다.",
             "details": "",
-            "status": "pending",
+            "status": "done",
             "dependencies": [],
             "parentTaskId": 8
           },
@@ -849,7 +849,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T07:51:43.919Z",
+      "updated": "2025-08-09T07:54:00.250Z",
       "description": "Tasks for master context"
     }
   }
