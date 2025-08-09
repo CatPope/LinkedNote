@@ -3,7 +3,6 @@ const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-moni
 const { showNotification } = require('./src/main/notification-manager');
 const { readConfig, writeConfig } = require('./src/main/config-manager');
 const axios = require('axios');
-const path = require('path');
 
 let tray = null
 let mainWindow = null
@@ -119,7 +118,7 @@ app.whenReady().then(() => {
   createWindow()
 
   // 트레이 아이콘 설정
-  tray = new Tray(nativeImage.createFromPath(path.join(__dirname, 'assets', 'icons', 'icon.png'))) // 경로 수정
+  tray = new Tray('assets/icons/icon.png') // 경로 수정
   const contextMenu = Menu.buildFromTemplate([
     { label: '설정', click: () => { createSettingsWindow() } },
     { label: '종료', click: () => app.quit() }
