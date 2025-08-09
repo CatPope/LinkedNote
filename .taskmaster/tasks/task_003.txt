@@ -1,0 +1,37 @@
+# Task ID: 3
+# Title: Phase 1: Implement Automatic Clipboard Monitoring
+# Status: done
+# Dependencies: 2
+# Priority: high
+# Description: Develop the functionality within the Electron app to continuously monitor the system clipboard for web URLs.
+# Details:
+Use Electron's clipboard API to detect strings matching http/https patterns. This should run in the background as part of the main process. Performance should be optimized to have less than 0.5s detection time.
+
+# Test Strategy:
+Copy various URLs and non-URL text from different applications (browser, Slack, text editor) and verify that only valid URLs are detected by the application's logs.
+
+# Subtasks:
+## 1. 클립보드 모니터링 모듈 생성 [done]
+### Dependencies: None
+### Description: Electron의 `clipboard` API를 사용하여 클립보드 변경을 감지하는 모듈을 생성합니다.
+### Details:
+
+
+## 2. URL 유효성 검사 로직 구현 [done]
+### Dependencies: None
+### Description: 클립보드에서 읽어온 텍스트가 유효한 웹 URL인지 확인하는 로직을 구현합니다.
+### Details:
+
+
+## 3. URL 감지 시 이벤트 발생 및 로깅 [done]
+### Dependencies: None
+### Description: 유효한 URL이 감지되면 특정 이벤트를 발생시키고, 감지된 URL을 로깅합니다.
+### Details:
+
+
+## 4. 클립보드 모니터링 백그라운드 실행 설정 [done]
+### Dependencies: None
+### Description: 클립보드 모니터링이 Electron 앱의 메인 프로세스에서 백그라운드로 지속적으로 실행되도록 설정합니다.
+### Details:
+
+

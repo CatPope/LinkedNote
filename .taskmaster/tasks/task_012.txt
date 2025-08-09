@@ -1,0 +1,49 @@
+# Task ID: 12
+# Title: Phase 3: Implement AES-256 Encryption for API Key
+# Status: done
+# Dependencies: 10, 11
+# Priority: high
+# Description: Securely store the user's OpenAI API key by encrypting it before saving it to the SQLite database.
+# Details:
+Replace the unencrypted storage from Task 10. When the user saves their API key, encrypt it using AES-256 and store the encrypted string in the `users` table. Decrypt it only when needed for an API call.
+
+# Test Strategy:
+Save an API key, inspect the SQLite database to confirm the stored value is an encrypted string, not plaintext. Verify that summarization still works.
+
+# Subtasks:
+## 1. 암호화 라이브러리 설치 [done]
+### Dependencies: None
+### Description: `cryptography` 파이썬 라이브러리를 설치합니다.
+### Details:
+
+
+## 2. 암호화/복호화 유틸리티 생성 [done]
+### Dependencies: None
+### Description: `backend/core/encryption.py` 파일을 생성하여 AES-256 암호화 및 복호화 함수를 구현합니다.
+### Details:
+
+
+## 3. API 키 암호화 저장 [done]
+### Dependencies: None
+### Description: `backend/services/user.py`를 수정하여 API 키를 데이터베이스에 저장하기 전에 암호화합니다.
+### Details:
+
+
+## 4. API 키 복호화 로드 [done]
+### Dependencies: None
+### Description: `backend/services/user.py`를 수정하여 API 키를 사용할 때 복호화합니다.
+### Details:
+
+
+## 5. 마이그레이션 스크립트 생성 [done]
+### Dependencies: None
+### Description: `users` 테이블의 `openai_api_key` 컬럼을 암호화된 문자열을 저장할 수 있도록 수정하는 마이그레이션 스크립트를 생성합니다.
+### Details:
+
+
+## 6. 마이그레이션 실행 [done]
+### Dependencies: None
+### Description: 마이그레이션을 적용하여 데이터베이스 스키마를 업데이트합니다.
+### Details:
+
+

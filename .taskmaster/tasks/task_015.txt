@@ -1,0 +1,43 @@
+# Task ID: 15
+# Title: Phase 4: Application Packaging and Distribution
+# Status: pending
+# Dependencies: 12, 13, 14
+# Priority: low
+# Description: Package the application into distributable installers for Windows, macOS, and Linux.
+# Details:
+Use Electron's packaging tools (e.g., electron-builder) to create native installers (.exe, .dmg, .deb/AppImage). Write a simple README and user guide for installation and usage.
+
+# Test Strategy:
+Build the installers for each target OS. Perform a clean installation on each platform and run through the primary user flow to ensure it works correctly.
+
+# Subtasks:
+## 1. Electron Builder 설치 및 설정 [pending]
+### Dependencies: None
+### Description: `electron-builder`를 설치하고 `package.json`에 빌드 설정을 추가합니다.
+### Details:
+
+
+## 2. Windows 설치 프로그램 빌드 [pending]
+### Dependencies: None
+### Description: Windows용 `.exe` 설치 프로그램을 빌드합니다.
+### Details:
+
+
+## 3. macOS 설치 프로그램 빌드 [pending]
+### Dependencies: None
+### Description: macOS용 `.dmg` 설치 프로그램을 빌드합니다.
+### Details:
+
+
+## 4. Linux 설치 프로그램 빌드 [pending]
+### Dependencies: None
+### Description: Linux용 `.deb` 또는 AppImage 설치 프로그램을 빌드합니다.
+### Details:
+
+
+## 5. README 및 사용자 가이드 작성 [pending]
+### Dependencies: None
+### Description: 설치 및 사용법에 대한 간단한 README 파일과 사용자 가이드를 작성합니다.
+### Details:
+
+

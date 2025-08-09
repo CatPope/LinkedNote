@@ -1,0 +1,25 @@
+# Task ID: 9
+# Title: Phase 2: Automatically Copy Results to Clipboard
+# Status: done
+# Dependencies: 8
+# Priority: medium
+# Description: Implement the feature to automatically copy the generated summary text to the system clipboard upon successful generation.
+# Details:
+Once the result is displayed in the results window, the content should be simultaneously written to the user's clipboard for immediate pasting.
+
+# Test Strategy:
+Generate a summary and immediately try to paste the content into a text editor. Verify the pasted content matches the summary.
+
+# Subtasks:
+## 1. 클립보드 복사 로직 구현 [done]
+### Dependencies: None
+### Description: 요약 결과가 생성되면 해당 텍스트를 시스템 클립보드에 복사하는 로직을 구현합니다.
+### Details:
+
+
+## 2. main.js 수정 (클립보드 복사) [done]
+### Dependencies: None
+### Description: `main.js`의 `createResultWindow` 함수 내에서 요약 내용이 클립보드에 복사되도록 `clipboard.writeText()`를 호출합니다.
+### Details:
+
+

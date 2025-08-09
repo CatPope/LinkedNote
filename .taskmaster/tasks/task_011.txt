@@ -1,0 +1,31 @@
+# Task ID: 11
+# Title: Phase 3: Setup SQLite Database and Schema
+# Status: done
+# Dependencies: 5
+# Priority: medium
+# Description: Initialize the local SQLite database and create the `users` and `summaries` tables according to the PRD's data models.
+# Details:
+The database file should be stored locally. Implement the schema as defined: `users(id, openai_api_key, created_at)` and `summaries(id, url, mode, content, created_at)`.
+
+# Test Strategy:
+Verify the database file is created on first run and that the tables exist with the correct columns and types.
+
+# Subtasks:
+## 1. summaries 테이블 스키마 정의 [done]
+### Dependencies: None
+### Description: `backend/models.py`에 `summaries` 테이블의 스키마를 정의합니다.
+### Details:
+
+
+## 2. Alembic 마이그레이션 스크립트 생성 [done]
+### Dependencies: None
+### Description: `summaries` 테이블 생성을 위한 Alembic 마이그레이션 스크립트를 생성합니다.
+### Details:
+
+
+## 3. 마이그레이션 실행 [done]
+### Dependencies: None
+### Description: 마이그레이션을 적용하여 데이터베이스 테이블을 생성합니다.
+### Details:
+
+

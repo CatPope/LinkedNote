@@ -1,0 +1,43 @@
+# Task ID: 6
+# Title: Phase 1: Implement Web Content Scraper
+# Status: done
+# Dependencies: 5
+# Priority: high
+# Description: Build the web scraping logic using BeautifulSoup4 and requests to extract the main text content from a given URL.
+# Details:
+The scraper should be a module within the backend. It needs to handle basic HTML structures to find article text, ignoring navigation, ads, and footers. Implement a 5-second timeout and graceful error handling for failed requests or parsing errors.
+
+# Test Strategy:
+Test the scraper with several article URLs and verify that it extracts the primary text content successfully.
+
+# Subtasks:
+## 1. 스크래퍼 모듈 생성 [done]
+### Dependencies: None
+### Description: `backend/services/scraper.py` 파일을 생성하여 웹 페이지에서 주요 텍스트 콘텐츠를 추출하는 로직을 구현합니다.
+### Details:
+
+
+## 2. requests 및 BeautifulSoup4 설치 [done]
+### Dependencies: None
+### Description: 웹 요청 및 HTML 파싱을 위한 라이브러리(`requests`, `BeautifulSoup4`)를 설치합니다.
+### Details:
+
+
+## 3. URL 콘텐츠 가져오기 [done]
+### Dependencies: None
+### Description: 주어진 URL에서 HTML 콘텐츠를 가져오는 함수를 구현합니다.
+### Details:
+
+
+## 4. 주요 텍스트 추출 [done]
+### Dependencies: None
+### Description: HTML에서 기사 본문과 같은 주요 텍스트 콘텐츠를 식별하고 추출하는 로직을 구현합니다.
+### Details:
+
+
+## 5. 오류 처리 및 타임아웃 [done]
+### Dependencies: None
+### Description: 요청 실패 또는 파싱 오류에 대한 적절한 오류 처리와 타임아웃을 구현합니다.
+### Details:
+
+

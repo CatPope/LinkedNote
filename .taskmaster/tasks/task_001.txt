@@ -1,0 +1,37 @@
+# Task ID: 1
+# Title: Setup Project Structure and Repositories
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Initialize the project with the defined file structure for both the Electron frontend and FastAPI backend. Set up the initial repository.
+# Details:
+Create the root directory `link-ai-summarizer/` with subdirectories `electron-app/` and `backend/`. Initialize basic package.json for Electron and requirements.txt for FastAPI.
+
+# Test Strategy:
+Verify that the directory structure matches the PRD's `File Structure` section and that initial dependency files are present.
+
+# Subtasks:
+## 1. Design and Set Up User Database Schema [done]
+### Dependencies: None
+### Description: Create the necessary database tables to store user information, including credentials and profile data.
+### Details:
+The schema should include a `users` table with columns for `id` (primary key), `username` (unique), `email` (unique), `password_hash`, `created_at`, and `updated_at`. Use a database migration tool to manage schema changes.
+
+## 2. Implement User Registration API Endpoint [done]
+### Dependencies: None
+### Description: Create a public API endpoint (e.g., `POST /api/auth/register`) that allows new users to create an account.
+### Details:
+The endpoint should accept a username, email, and password. It must validate the input (e.g., check for existing username/email, enforce password complexity). Hash the password using a strong algorithm like bcrypt before storing it in the database. Return a success message or user object upon successful registration.
+
+## 3. Implement User Login and JWT Generation [done]
+### Dependencies: None
+### Description: Create an API endpoint (e.g., `POST /api/auth/login`) for users to authenticate and receive an access token.
+### Details:
+The endpoint should accept a username/email and a password. It will verify the credentials by comparing the provided password with the stored hash. Upon successful authentication, generate a JSON Web Token (JWT) containing the user ID and an expiration date. The JWT should be signed with a secret key stored in environment variables.
+
+## 4. Develop Authentication Middleware for Protected Routes [done]
+### Dependencies: None
+### Description: Implement middleware that can be applied to API routes to ensure they are only accessible by authenticated users.
+### Details:
+The middleware should extract the JWT from the `Authorization` header (e.g., `Bearer <token>`). It must then validate the token's signature and check its expiration. If the token is valid, the user's information (e.g., user ID) should be attached to the request object for use by subsequent handlers. If the token is invalid or missing, the middleware should return a 401 Unauthorized error.
+

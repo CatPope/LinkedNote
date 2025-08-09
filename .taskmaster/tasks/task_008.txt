@@ -1,0 +1,49 @@
+# Task ID: 8
+# Title: Phase 2: Create UI for Interaction and Results
+# Status: done
+# Dependencies: 4, 7
+# Priority: medium
+# Description: Build the two primary UI windows: the 300x200px popup for mode selection and the 600x400px window for displaying results.
+# Details:
+Clicking the notification (from Task 4) opens the selection popup. After clicking 'Summarize', a loading indicator is shown, and then the results appear in the new, larger window. The windows should have fixed dimensions.
+
+# Test Strategy:
+Trigger the user flow and verify that the correct windows appear with the specified dimensions and that the UI is responsive.
+
+# Subtasks:
+## 1. 모드 선택 팝업 HTML/CSS 생성 [done]
+### Dependencies: None
+### Description: 모드 선택(예: "빠른 요약", "자세한 요약")을 위한 300x200px 팝업 창의 HTML/CSS를 생성합니다.
+### Details:
+
+
+## 2. 결과 표시 창 HTML/CSS 생성 [done]
+### Dependencies: None
+### Description: 요약 결과를 표시하기 위한 600x400px 창의 HTML/CSS를 생성합니다.
+### Details:
+
+
+## 3. 모드 선택 팝업 로드 및 표시 [done]
+### Dependencies: None
+### Description: Electron의 `BrowserWindow`를 사용하여 모드 선택 팝업을 로드하고 표시합니다.
+### Details:
+
+
+## 4. 결과 표시 창 로드 및 표시 [done]
+### Dependencies: None
+### Description: Electron의 `BrowserWindow`를 사용하여 결과 표시 창을 로드하고 표시합니다.
+### Details:
+
+
+## 5. 팝업과 결과 창 간의 통신 구현 [done]
+### Dependencies: None
+### Description: 모드 선택 팝업에서 선택된 모드와 URL을 결과 창으로 전달하는 IPC 통신을 구현합니다.
+### Details:
+
+
+## 6. 로딩 인디케이터 구현 [done]
+### Dependencies: None
+### Description: 요약 요청 중 로딩 인디케이터를 표시하는 UI를 구현합니다.
+### Details:
+
+

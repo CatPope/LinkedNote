@@ -1,0 +1,43 @@
+# Task ID: 2
+# Title: Phase 1: Implement Electron System Tray Integration
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Create the core Electron application that runs persistently in the system tray with a basic icon and right-click menu.
+# Details:
+The application should launch minimized to the system tray. A right-click on the icon should show a basic menu (e.g., 'Settings', 'Quit'). This task focuses on the native OS integration, not the UI windows.
+
+# Test Strategy:
+Run the application on Windows, macOS, and Linux to confirm the tray icon appears and the context menu functions correctly.
+
+# Subtasks:
+## 1. Electron 프로젝트 초기화 [done]
+### Dependencies: None
+### Description: Electron 프로젝트를 설정하고 필요한 종속성을 설치합니다.
+### Details:
+
+
+## 2. 기본 Electron 창 생성 [done]
+### Dependencies: None
+### Description: Electron 애플리케이션의 기본 창을 생성합니다.
+### Details:
+
+
+## 3. 시스템 트레이 아이콘 구현 [done]
+### Dependencies: None
+### Description: 시스템 트레이에 아이콘을 표시하고 기본 이미지를 설정합니다.
+### Details:
+
+
+## 4. 트레이 메뉴 구현 [done]
+### Dependencies: None
+### Description: 트레이 아이콘을 마우스 오른쪽 버튼으로 클릭했을 때 나타나는 메뉴를 구현합니다 (예: "설정", "종료").
+### Details:
+
+
+## 5. 애플리케이션 시작 시 트레이로 최소화 [done]
+### Dependencies: None
+### Description: 애플리케이션이 시작될 때 창이 아닌 트레이로 최소화되도록 설정합니다.
+### Details:
+
+
