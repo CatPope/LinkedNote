@@ -26,8 +26,6 @@ LinkedNote는 클립보드에서 웹 URL을 자동으로 감지하고, 해당 UR
     ```bash
     cd backend
     pip install -r requirements.txt
-    cd ./..
-    python -m alembic upgrade head
     ```
 
 3.  **환경 변수 설정**: `.env.example` 파일을 `.env`로 복사하고 필요한 API 키를 입력합니다.
@@ -37,9 +35,15 @@ LinkedNote는 클립보드에서 웹 URL을 자동으로 감지하고, 해당 UR
     # SECRET_KEY="your-super-secret-key"
     # ALGORITHM="HS256"
     # OPENAI_API_KEY="your-openai-api-key"
-    # ENCRYPTION_KEY="your-encryption-key" (python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())" 로 생성)
+    # ENCRYPTION_KEY="your-encryption-key"
     ```
 
+4.  **백엔드 설정 (FastAPI)**:
+    ```bash
+    cd ./..
+    python -m alembic upgrade head
+    ```
+---
 4.  **백엔드 서버 실행**: 
     ```bash
     uvicorn main:app --reload --port 8000
