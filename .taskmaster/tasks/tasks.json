@@ -378,7 +378,7 @@
           4,
           7
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -450,39 +450,21 @@
         "subtasks": [
           {
             "id": 1,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create a secure API endpoint for new user registration. This includes input validation, password hashing, and storing user data in the database.",
+            "title": "클립보드 복사 로직 구현",
+            "description": "요약 결과가 생성되면 해당 텍스트를 시스템 클립보드에 복사하는 로직을 구현합니다.",
+            "details": "",
+            "status": "done",
             "dependencies": [],
-            "details": "Endpoint: POST /api/auth/register. Request body should include username, email, and password. Use bcrypt for password hashing. Validate that email and username are unique. On success, return a 201 Created status. On failure, return appropriate 4xx error codes (e.g., 400 for invalid input, 409 for duplicate user).",
-            "status": "pending",
-            "testStrategy": "Write unit tests for the validation logic (email format, password strength). Create integration tests to cover successful registration, registration with duplicate credentials, and registration with invalid data. Verify that passwords are correctly hashed in the database."
+            "parentTaskId": 9
           },
           {
             "id": 2,
-            "title": "Implement User Login and JWT Generation",
-            "description": "Build the API endpoint for user authentication. It should verify user credentials and, upon successful authentication, generate and return a JSON Web Token (JWT).",
-            "dependencies": [],
-            "details": "Endpoint: POST /api/auth/login. Request body should include email and password. Find the user by email, then use bcrypt.compare to verify the password against the stored hash. If valid, generate a JWT containing the user ID and role, signed with a secret key. The token should have a defined expiration time.",
+            "title": "main.js 수정 (클립보드 복사)",
+            "description": "`main.js`의 `createResultWindow` 함수 내에서 요약 내용이 클립보드에 복사되도록 `clipboard.writeText()`를 호출합니다.",
+            "details": "",
             "status": "pending",
-            "testStrategy": "Write integration tests for the login endpoint. Test successful login with valid credentials, failed login with an incorrect password, and failed login for a non-existent user. Verify the structure and signature of the returned JWT. Ensure a 401 Unauthorized status is returned for failed attempts."
-          },
-          {
-            "id": 3,
-            "title": "Develop User Registration API Endpoint",
-            "description": "Create the backend endpoint to handle new user registration, including input validation, password hashing, and database record creation.",
             "dependencies": [],
-            "details": "Implement a POST /api/auth/register endpoint. It should accept 'email', 'password', and 'username'. Validate that the email is unique and the password meets security standards (e.g., min 8 characters). Use bcrypt to hash the password before saving the new user to the database. On success, return a 201 Created status and the new user object (without the password hash).",
-            "status": "pending",
-            "testStrategy": "Write unit tests to verify input validation logic (invalid email, weak password). Write integration tests to simulate API calls: test successful registration, registration with a duplicate email, and registration with missing fields. Verify the password stored in the database is correctly hashed."
-          },
-          {
-            "id": 4,
-            "title": "Develop User Login API Endpoint",
-            "description": "Create the backend endpoint to authenticate users with their credentials and issue a JSON Web Token (JWT) upon successful login.",
-            "dependencies": [],
-            "details": "Implement a POST /api/auth/login endpoint. It should accept 'email' and 'password'. Find the user by email, then use bcrypt to compare the provided password with the stored hash. If they match, generate a signed JWT containing the user ID and role. Return the JWT in the response body. If authentication fails, return a 401 Unauthorized status.",
-            "status": "pending",
-            "testStrategy": "Write integration tests to simulate API calls: test successful login with valid credentials, failed login with an incorrect password, and failed login for a non-existent user. Verify that a valid JWT is returned on success and that the token can be decoded with the correct secret key."
+            "parentTaskId": 9
           }
         ]
       },
@@ -849,7 +831,7 @@
     ],
     "metadata": {
       "created": "2025-08-08T13:54:05.048Z",
-      "updated": "2025-08-09T07:59:45.392Z",
+      "updated": "2025-08-09T08:06:50.426Z",
       "description": "Tasks for master context"
     }
   }

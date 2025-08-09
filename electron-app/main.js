@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu, ipcMain } = require('electron')
+const { app, BrowserWindow, Tray, Menu, ipcMain, clipboard } = require('electron')
 const { startMonitoring, clipboardEmitter } = require('./src/main/clipboard-monitor');
 const { showNotification } = require('./src/main/notification-manager');
 const { readConfig, writeConfig } = require('./src/main/config-manager');
@@ -106,6 +106,7 @@ function createResultWindow(summaryContent) {
   resultWindow.once('ready-to-show', () => {
     resultWindow.show()
     resultWindow.webContents.send('summary-content', summaryContent);
+    clipboard.writeText(summaryContent);
   })
 
   resultWindow.on('closed', () => {
@@ -168,7 +169,7 @@ app.whenReady().then(() => {
     }
 
     // 로딩 인디케이터 표시
-    createResultWindow(''); // 빈 내용으로 결과 창 생성
+    createResultWindow('');
     if (resultWindow) {
       resultWindow.webContents.send('show-loading');
     }
