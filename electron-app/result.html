@@ -8,6 +8,10 @@
   <body>
     <h1>Summary Result</h1>
     <div class="container">
+      <div id="loadingIndicator" class="hidden">
+        <div class="spinner"></div>
+        <p>Summarizing...</p>
+      </div>
       <p id="summaryContent"></p>
     </div>
     <script>
@@ -15,9 +19,16 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         const summaryContentElement = document.getElementById('summaryContent');
+        const loadingIndicator = document.getElementById('loadingIndicator');
 
         ipcRenderer.on('summary-content', (event, summaryContent) => {
+          loadingIndicator.classList.add('hidden'); // 로딩 인디케이터 숨기기
           summaryContentElement.textContent = summaryContent;
+        });
+
+        ipcRenderer.on('show-loading', () => {
+          loadingIndicator.classList.remove('hidden'); // 로딩 인디케이터 표시
+          summaryContentElement.textContent = ''; // 기존 내용 지우기
         });
       });
     </script>

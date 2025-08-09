@@ -167,6 +167,12 @@ app.whenReady().then(() => {
       modeSelectionWindow.close();
     }
 
+    // 로딩 인디케이터 표시
+    createResultWindow(''); // 빈 내용으로 결과 창 생성
+    if (resultWindow) {
+      resultWindow.webContents.send('show-loading');
+    }
+
     try {
       const response = await axios.post('http://localhost:8000/api/summarize', {
         url: url,
