@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Depends
-from .api import auth
-from .api.dependencies import get_current_user
-from .models import User
-from .schemas import user as user_schemas
-from .api import summarize
-from .api import history
+from backend.api import auth
+from backend.api.dependencies import get_current_user
+from backend.models import User
+from backend.schemas import user as user_schemas
+from backend.api import summarize
+from backend.api import history
 
 app = FastAPI()
 
