@@ -120,9 +120,7 @@ app.whenReady().then(() => {
   createWindow()
 
   // 트레이 아이콘 설정
-  const iconPath = path.join(app.getAppPath(), 'assets', 'icons', 'icon.png');
-  console.log('Attempting to load tray icon from:', iconPath);
-  tray = new Tray(nativeImage.createFromPath(iconPath));
+  tray = new Tray('assets/icons/icon.png') // 경로 수정
   const contextMenu = Menu.buildFromTemplate([
     { label: '설정', click: () => { createSettingsWindow() } },
     { label: '종료', click: () => app.quit() }
@@ -172,10 +170,15 @@ app.whenReady().then(() => {
       modeSelectionWindow.close();
     }
 
-    // 로딩 인디케이터 표시
-    createResultWindow('');
+    // 결과 창이 없으면 새로 생성하고, 있으면 기존 창을 사용
+    if (!resultWindow) {
+      createResultWindow(''); // 빈 내용으로 창 생성 (로딩 인디케이터 표시용)
+    } else {
+      resultWindow.show(); // 이미 열려있으면 다시 보여주기
+    }
+
     if (resultWindow) {
-      resultWindow.webContents.send('show-loading');
+      resultWindow.webContents.send('show-loading'); // 로딩 인디케이터 표시
     }
 
     try {
@@ -183,7 +186,11 @@ app.whenReady().then(() => {
         url: url,
         mode: mode
       });
-      createResultWindow(response.data.summary);
+      // 요약 내용을 직접 resultWindow로 전송
+      if (resultWindow) {
+        resultWindow.webContents.send('summary-content', response.data.summary);
+        clipboard.writeText(response.data.summary); // 클립보드에 복사
+      }
     } catch (error) {
       console.error('Error summarizing URL:', error.message);
       let errorMessage = '요약 중 오류가 발생했습니다.';
@@ -194,7 +201,10 @@ app.whenReady().then(() => {
       } else {
         errorMessage = `알 수 없는 오류: ${error.message}`;
       }
-      createResultWindow(errorMessage);
+      // 오류 메시지를 직접 resultWindow로 전송
+      if (resultWindow) {
+        resultWindow.webContents.send('summary-content', errorMessage);
+      }
     }
   });
 
