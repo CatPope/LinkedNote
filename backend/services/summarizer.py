@@ -11,13 +11,43 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def summarize_text_with_openai(db: Session, url: str, text: str, mode: str) -> str:
     if mode == "quick":
-        prompt = f"Summarize the following text concisely: {text}"
+        prompt = f"""<context>
+{text}
+</context>
+
+request: Create a concise summary with:
+[Title] - a short, clear headline.
+[Brief Description] - 2–3 sentences covering only the main points.
+
+chat:"""
+
     elif mode == "detailed":
-        prompt = f"Provide a detailed summary of the following text: {text}"
+        prompt = f"""<context>
+{text}
+</context>
+
+request: Provide a detailed, well-structured summary highlighting key points, important facts, and relevant context. Avoid repetition and keep it factual.
+
+chat:"""
+
     elif mode == "tags":
-        prompt = f"Extract relevant keywords or tags from the following text, separated by commas: {text}"
+        prompt = f"""<context>
+{text}
+</context>
+
+request: Identify 5–10 highly relevant keywords or tags from the content above, separated by commas. Exclude generic or irrelevant terms.
+
+chat:"""
+
     elif mode == "full":
-        prompt = f"Return the full text provided: {text}"
+        prompt = f"""<context>
+{text}
+</context>
+
+request: Return the content above exactly as provided, without any modifications or commentary.
+
+chat:"""
+
     else:
         return "Unsupported summary mode."
 
@@ -25,7 +55,7 @@ def summarize_text_with_openai(db: Session, url: str, text: str, mode: str) -> s
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "You are an assistant that processes and summarizes content with precision, clarity, and relevance to the user's request."},
                 {"role": "user", "content": prompt}
             ]
         )
