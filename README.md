@@ -22,13 +22,7 @@ LinkedNote는 클립보드에서 웹 URL을 자동으로 감지하고, 해당 UR
     cd LinkedNote
     ```
 
-2.  **백엔드 설정 (FastAPI)**:
-    ```bash
-    cd backend
-    pip install -r requirements.txt
-    ```
-
-3.  **환경 변수 설정**: `.env.example` 파일을 `.env`로 복사하고 필요한 API 키를 입력합니다.
+2.  **환경 변수 설정**: `.env.example` 파일을 `.env`로 복사하고 필요한 API 키를 입력합니다.
     ```bash
     cp .env.example .env
     # .env 파일에 OpenAI API 키와 암호화 키를 추가합니다.
@@ -38,12 +32,14 @@ LinkedNote는 클립보드에서 웹 URL을 자동으로 감지하고, 해당 UR
     # ENCRYPTION_KEY="your-encryption-key"
     ```
 
-4.  **백엔드 설정 (FastAPI)**:
+3.  **백엔드 설정 (FastAPI)**:
     ```bash
+    cd backend
+    pip install -r requirements.txt
     cd ./..
     python -m alembic upgrade head
     ```
----
+
 4.  **백엔드 서버 실행**: 
     ```bash
     uvicorn backend.main:app --reload --port 8000
