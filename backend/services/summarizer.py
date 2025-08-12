@@ -16,8 +16,11 @@ def summarize_text_with_openai(db: Session, url: str, text: str, mode: str) -> s
 </context>
 
 request: Create a concise summary with:
+
+<example>
 [Title] - a short, clear headline.
-[Brief Description] - 2–3 sentences covering only the main points.
+[Sumary] - A brief, one or two-sentence summary of the main points.
+</example>
 
 chat:"""
 
@@ -28,6 +31,11 @@ chat:"""
 
 request: Provide a detailed, well-structured summary highlighting key points, important facts, and relevant context. Avoid repetition and keep it factual.
 
+<example>
+[Title] - a short, clear headline.
+[Detail] - A multi-paragraph summary covering all key information and context in a logical flow.
+</example>
+
 chat:"""
 
     elif mode == "tags":
@@ -35,7 +43,12 @@ chat:"""
 {text}
 </context>
 
-request: Identify 5–10 highly relevant keywords or tags from the content above, separated by commas. Exclude generic or irrelevant terms.
+request: Identify 3–6 highly relevant keywords or tags from the content above, separated by commas. Exclude generic or irrelevant terms.
+
+<example>
+[Title] - a short, clear headline.
+[Tags] - keyword1, keyword2, keyword3, keyword4
+</example>
 
 chat:"""
 
@@ -45,6 +58,11 @@ chat:"""
 </context>
 
 request: Return the content above exactly as provided, without any modifications or commentary.
+
+<example>
+[Title] - a short, clear headline.
+[Full Text] - The entire original content, formatted for easy readability without any modifications.
+</example>
 
 chat:"""
 
